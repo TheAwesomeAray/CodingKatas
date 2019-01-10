@@ -43,5 +43,12 @@ namespace CodingKataTests
             Assert.Equal(2, BitCountingSolution.CountBits(9));
             Assert.Equal(2, BitCountingSolution.CountBits(10));
         }
+
+        [Fact]
+        public void FindTheOddIntTest()
+        {
+            Assert.Equal(5, FindTheOddInt.Find(new[] { 20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5 }));
+            Assert.Equal(5, FindTheOddIntSolution.Find(new[] { 20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5 }));
+        }
     }
 }
