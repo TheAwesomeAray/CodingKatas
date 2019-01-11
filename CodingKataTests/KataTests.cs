@@ -1,4 +1,7 @@
 using CodingKatas;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace CodingKataTests
@@ -50,5 +53,42 @@ namespace CodingKataTests
             Assert.Equal(5, FindTheOddInt.Find(new[] { 20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5 }));
             Assert.Equal(5, FindTheOddIntSolution.Find(new[] { 20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5 }));
         }
+
+        [Theory, ClassData(typeof(FindTheSmallestTestData))]
+        public void FindTheSmallestTest(List<int> argument, List<int> expectedResult)
+        {
+            Assert.Equal(expectedResult, RemoveTheMinimum.RemoveSmallest(argument));
+            Assert.Equal(expectedResult, RemoveTheMinimumSolution.RemoveSmallest(argument));
+        }
+
+        public class FindTheSmallestTestData : IEnumerable<object[]>
+        {
+            private readonly List<object[]> _data = new List<object[]>
+            {
+                new object[] {
+                    new List<int> { 1, 2, 3, 4, 5 }, new List<int> { 2, 3, 4, 5 }
+                },
+                new object[] {
+                    new List<int> { 5, 3, 2, 1, 4 }, new List<int> { 5, 3, 2, 4 }
+                },
+                new object[] {
+                    new List<int> { 1, 2, 3, 1, 1 }, new List<int> { 2, 3, 1, 1 }
+                },
+                new object[] {
+                    new List<int>(), new List<int>()
+                }
+            };
+
+            public IEnumerator<object[]> GetEnumerator()
+            {
+                return _data.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+
     }
 }
