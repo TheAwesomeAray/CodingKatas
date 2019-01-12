@@ -90,5 +90,16 @@ namespace CodingKataTests
             }
         }
 
+        [Theory]
+        [InlineData(new int[] { 0, 0, 0, 0 }, 0)]
+        [InlineData(new int[] { 1, 1, 1, 1 }, 15)]
+        [InlineData(new int[] { 0, 1, 1, 0 }, 6)]
+        [InlineData(new int[] { 0, 1, 0, 1 }, 5)]
+        public void BinaryArrayToNumberReturnsInt(int[] binaryArray, int expected)
+        {
+            var actual = OnesAndZeros.BinaryArrayToNumber(binaryArray);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
