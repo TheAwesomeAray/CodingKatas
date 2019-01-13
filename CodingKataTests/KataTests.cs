@@ -101,5 +101,35 @@ namespace CodingKataTests
 
             Assert.Equal(expected, actual);
         }
+
+        public class SumDigitPowerTests
+        {
+            private string Array2String(long[] list)
+            {
+                return "[" + string.Join(", ", list) + "]";
+            }
+
+            private void CheckResultAsString(long a, long b, long[] res)
+            {
+                Assert.Equal(Array2String(res), 
+                    Array2String(SumDigitPowers.SumDigPow(a, b)));
+
+                Assert.Equal(Array2String(res),
+                    Array2String(SumDigitPowersSolution.SumDigPow(a, b)));
+            }
+
+            [Fact]
+            public void OnlyNumbersWhosSumDigitPowersEqualTheOriginalNumberShouldBeReturned()
+            {
+                CheckResultAsString(1, 10, new long[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+                CheckResultAsString(1, 100, new long[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 89 });
+                CheckResultAsString(10, 100, new long[] { 89 });
+                CheckResultAsString(90, 100, new long[] { });
+                CheckResultAsString(90, 150, new long[] { 135 });
+                CheckResultAsString(50, 150, new long[] { 89, 135 });
+                CheckResultAsString(10, 150, new long[] { 89, 135 });
+
+            }
+        }
     }
 }
