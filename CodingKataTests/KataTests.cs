@@ -131,5 +131,23 @@ namespace CodingKataTests
 
             }
         }
+
+        public class SupermarketQueueTests
+        {
+            [Theory]
+            [InlineData(new int[] { }, 1, 0)]
+            [InlineData(new int[] { 1, 2, 3, 4 }, 1, 10)]
+            [InlineData(new int[] { 2, 2, 3, 3, 4, 4 }, 2, 9)]
+            [InlineData(new int[] { 1, 2, 3, 4, 5 }, 100, 5)]
+            public void ExampleTest1(int[] customers, int registerCount, long expected)
+            {
+                long actual = SupermarkerQueue.QueueTime(customers, registerCount);
+                long solutionActual = SupermarketQueueSolution.QueueTime(customers, registerCount);
+
+                Assert.Equal(expected, actual);
+                Assert.Equal(expected, solutionActual);
+            }
+        }
+
     }
 }
