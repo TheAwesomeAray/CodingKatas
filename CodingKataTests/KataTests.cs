@@ -149,5 +149,23 @@ namespace CodingKataTests
             }
         }
 
+        public class SimplePigLatinTests
+        {
+            [Theory]
+            [InlineData("Pig", "igPay")]
+            [InlineData("Latin", "atinLay")]
+            [InlineData("Pig latin is cool", "igPay atinlay siay oolcay")]
+            [InlineData("This is my string", "hisTay siay ymay tringsay")]
+            public void PigIt_PassedInputString_ReturnsPigLatin(string input, string expected)
+            {
+                Assert.Equal(expected, SimplePigLatin.PigIt(input));
+                Assert.Equal(expected, SimplePigLatinSolution.PigIt(input));
+                //Assert.Equal("igPay atinlay siay oolcay", SimplePigLatin.PigIt("Pig latin is cool"));
+                //Assert.Equal("hisTay siay ymay tringsay", SimplePigLatin.PigIt("This is my string"));
+            }
+
+        }
+
+
     }
 }
