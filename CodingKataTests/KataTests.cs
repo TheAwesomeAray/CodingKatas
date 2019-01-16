@@ -160,10 +160,23 @@ namespace CodingKataTests
             {
                 Assert.Equal(expected, SimplePigLatin.PigIt(input));
                 Assert.Equal(expected, SimplePigLatinSolution.PigIt(input));
-                //Assert.Equal("igPay atinlay siay oolcay", SimplePigLatin.PigIt("Pig latin is cool"));
-                //Assert.Equal("hisTay siay ymay tringsay", SimplePigLatin.PigIt("This is my string"));
             }
 
+        }
+
+        public class WhoLikesItTests
+        {
+            [Theory]
+            [InlineData(new string[0], "no one likes this")]
+            [InlineData(new[] { "Peter" }, "Peter likes this")]
+            [InlineData(new[] { "Jacob", "Alex" }, "Jacob and Alex like this")]
+            [InlineData(new[] { "Max", "John", "Mark" }, "Max, John and Mark like this")]
+            [InlineData(new[] { "Alex", "Jacob", "Mark", "Max" }, "Alex, Jacob and 2 others like this")]
+            public void Likes_ArrayOfStrings_ReturnsValidStringResult(string[] input, string expected)
+            {
+                Assert.Equal(expected, WhoLikesIt.Likes(input));
+                Assert.Equal(expected, WhoLikesItSolution.Likes(input));
+            }
         }
 
 
