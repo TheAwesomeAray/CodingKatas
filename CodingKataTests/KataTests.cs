@@ -111,7 +111,7 @@ namespace CodingKataTests
 
             private void CheckResultAsString(long a, long b, long[] res)
             {
-                Assert.Equal(Array2String(res), 
+                Assert.Equal(Array2String(res),
                     Array2String(SumDigitPowers.SumDigPow(a, b)));
 
                 Assert.Equal(Array2String(res),
@@ -176,6 +176,19 @@ namespace CodingKataTests
             {
                 Assert.Equal(expected, WhoLikesIt.Likes(input));
                 Assert.Equal(expected, WhoLikesItSolution.Likes(input));
+            }
+        }
+
+        public class CamelCaseTests
+        {
+            [Theory]
+            [InlineData("the_stealth_warrior", "theStealthWarrior")]
+            [InlineData("The-Stealth-Warrior", "TheStealthWarrior")]
+            public void ToCamelCase_ConvertsInputToCamelCase(string input, string expected)
+            {
+                string actual = ToCamelCaseKata.ToCamelCase(input);
+
+                Assert.Equal(expected, actual);
             }
         }
 
