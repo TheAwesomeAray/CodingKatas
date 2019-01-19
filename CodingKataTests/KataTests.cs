@@ -195,15 +195,59 @@ namespace CodingKataTests
         public class TribonacciTests
         {
             [Theory]
-            //[InlineData(new double[] { 1, 1, 1 }, 4, new double[] { 1, 1, 1, 3 })]
-            //[InlineData(new double[] { 1, 1, 1 }, 10, new double[] { 1, 1, 1, 3, 5, 9, 17, 31, 57, 105 })]
-            //[InlineData(new double[] { 0, 0, 1 }, 10, new double[] { 0, 0, 1, 1, 2, 4, 7, 13, 24, 44 })]
-            //[InlineData(new double[] { 0, 1, 1 }, 10, new double[] { 0, 1, 1, 2, 4, 7, 13, 24, 44, 81 })]
+            [InlineData(new double[] { 1, 1, 1 }, 4, new double[] { 1, 1, 1, 3 })]
+            [InlineData(new double[] { 1, 1, 1 }, 10, new double[] { 1, 1, 1, 3, 5, 9, 17, 31, 57, 105 })]
+            [InlineData(new double[] { 0, 0, 1 }, 10, new double[] { 0, 0, 1, 1, 2, 4, 7, 13, 24, 44 })]
+            [InlineData(new double[] { 0, 1, 1 }, 10, new double[] { 0, 1, 1, 2, 4, 7, 13, 24, 44, 81 })]
             [InlineData(new double[] { 0 }, 2, new double[] { 0, 0 })]
             public void Tribonacci_GivenSequenceAndIterations_ReturnsResult(
                 double[] sequence, int n, double[] expected)
             {
                 Assert.Equal(expected, new Xbonacci().Tribonacci(sequence, n));
+            }
+        }
+
+        public class PaginationHelperTests
+        {
+            private List<int> collection;
+            private PaginationHelper<int> helper;
+
+            public PaginationHelperTests()
+            {
+                collection = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+                                            14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
+                helper = new PaginationHelper<int>(collection, 10);
+            }
+
+
+            [Theory]
+            [InlineData(-1, -1)]
+            [InlineData(1, 10)]
+            [InlineData(3, -1)]
+            public void PageItemCountTest(int pageIndex, int expected)
+            {
+                Assert.Equal(expected, helper.PageItemCount(pageIndex));
+            }
+
+            [Theory]
+            [InlineData(-1, -1)]
+            [InlineData(12, 1)]
+            [InlineData(24, -1)]
+            public void PageIndexTest(int itemIndex, int expected)
+            {
+                Assert.Equal(expected, helper.PageIndex(itemIndex));
+            }
+
+            [Fact]
+            public void ItemCountTest()
+            {
+                Assert.Equal(24, helper.ItemCount);
+            }
+
+            [Fact]
+            public void PageCountTest()
+            {
+                Assert.Equal(3, helper.PageCount);
             }
         }
     }
