@@ -250,5 +250,19 @@ namespace CodingKataTests
                 Assert.Equal(3, helper.PageCount);
             }
         }
+
+        public class WordSuggestionTests
+        {
+            [Theory]
+            [InlineData("java", "heaven", new[] { "javascript", "java", "ruby", "php", "python", "coffeescript" })]
+            [InlineData("javascript", "javascript", new[] { "javascript", "java", "ruby", "php", "python", "coffeescript" })]
+            [InlineData("strawberry", "strawbery", new[] { "cherry", "pineapple", "melon", "strawberry", "raspberry" })]
+            [InlineData("cherry", "berry", new[] { "cherry", "pineapple", "melon", "strawberry", "raspberry" })]
+            public void FindMostSimilar_GivenStringInput_ReturnsMostSimilarWordInDictionary(string expected, string searchTerm, string[] dictionary)
+            {
+                WordSuggestion kata = new WordSuggestion(dictionary);
+                Assert.Equal(expected, kata.FindMostSimilar(searchTerm));
+            }
+        }
     }
 }
