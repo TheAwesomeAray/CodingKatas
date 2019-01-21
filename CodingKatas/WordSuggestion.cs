@@ -19,31 +19,41 @@ namespace CodingKatas
             Dictionary<string, int> characterDifferences = new Dictionary<string, int>();
 
             foreach (var word in _words)
-                characterDifferences.Add(word, LevenshteinDistance(term, term.Length, word, word.Length));
+                characterDifferences.Add(word, GetMinimumChangedCharactersToMakeMatch(term, word));
 
             return characterDifferences.First(x => x.Value == characterDifferences.Min(y => y.Value)).Key;
         }
 
-        public int LevenshteinDistance(string s, int len_s, string t, int len_t)
+        public int GetMinimumChangedCharactersToMakeMatch(string s, string t)
         {
-            int cost;
-            
-            if (len_s == 0) return len_t;
-            if (len_t == 0) return len_s;
+            int[,] d = new int[s.Length, t.Length];
 
-            /* test if last characters of the strings match */
-            if (s[len_s - 1] == t[len_t - 1])
-                cost = 0;
-            else
-                cost = 1;
+            for (int i = 0; i < s.Length; i++)
+                d[i, 0] = 0;
 
-            /* return minimum of delete char from s, delete char from t, and delete char from both */
-            return new[] { LevenshteinDistance(s, len_s - 1, t, len_t) + 1,
-                           LevenshteinDistance(s, len_s, t, len_t - 1) + 1,
-                           LevenshteinDistance(s, len_s - 1, t, len_t - 1) + cost }.Min();
+            for (int i = 1; i < s.Length; i++)
+                d[i, 0] = i;
+
+            for (int j = 1; j < t.Length; j++)
+                d[0, j] = j;
+
+            for (int j = 1; j < t.Length; j++)
+            {
+                for (int i = 1; i < s.Length; i++)
+                {
+                    int substutionCost;
+                    if (s[i] == t[j])
+                        substutionCost = 0;
+                    else
+                        substutionCost = 1;
+
+                    d[i, j] = new[] { d[i - 1, j] + 1,
+                                     d[i, j - 1] + 1,
+                                     d[i - 1, j - 1] + substutionCost }.Min();
+                }
+            }
+
+            return d[s.Length - 1, t.Length - 1];
         }
-
     }
-
-
 }
