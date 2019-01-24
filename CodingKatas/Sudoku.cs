@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -14,13 +15,41 @@ public class Sudoku
 
     public bool IsValid()
     {
-        if (!ValidPuzzleSize(puzzle))
+        if (!ValidPuzzleSize())
             return false;
 
-        return ValidPuzzleContents(puzzle);
+        if (!ValidLittleSqaures())
+            return false;
+
+
+
+        return ValidPuzzleContents();
     }
 
-    private bool ValidPuzzleContents(int[][] puzzle)
+    private bool ValidLittleSqaures()
+    {
+        var littleSquareSize = Math.Sqrt(puzzleSize);
+
+        for (int i = 0; i < puzzleSize / littleSquareSize; i++)
+        {
+            var littleSquare = new HashSet<int>();
+
+            for (int j = 0; j < littleSquareSize; j++)
+            {
+                for (int k = 0; k < littleSquareSize; k++)
+                {
+                    littleSquare.Add(puzzle[j][k]);
+                }
+            }
+
+            if (littleSquare.Count != puzzleSize)
+                return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidPuzzleContents()
     {
         foreach (var arr in puzzle)
         {
@@ -28,10 +57,10 @@ public class Sudoku
                 return false;
         }
 
-        return ContainsDuplicatesOnYAxis();
+        return YAxisContainsCorrectValues();
     }
 
-    private bool ContainsDuplicatesOnYAxis()
+    private bool YAxisContainsCorrectValues()
     {
         for (int i = 0; i < puzzleSize; i++)
         {
@@ -63,9 +92,12 @@ public class Sudoku
         return true;
     }
 
-    public bool ValidPuzzleSize(int[][] puzzle)
+    public bool ValidPuzzleSize()
     {
         if (!puzzle.Any())
+            return false;
+
+        if (Math.Sqrt(puzzleSize) % 1 != 0)
             return false;
 
         foreach (var arr in puzzle)

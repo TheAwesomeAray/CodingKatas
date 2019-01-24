@@ -288,7 +288,41 @@ namespace CodingKataTests
             }
 
             [Fact]
+            public void Test()
+            {
+                var goodSudoku1 = new Sudoku(
+                  new int[][] {
+                      new int[] {1, 2, 3,   4, 5, 6,   7, 8, 9},
+                      new int[] {2, 3, 1,   5, 6, 4,   8, 9, 7},
+                      new int[] {3, 1, 2,   6, 4, 5,   9, 7, 8},
+
+                      new int[] {4, 5, 6,   7, 8, 9,   1, 2, 3},
+                      new int[] {5, 6, 4,   8, 9, 7,   2, 3, 1},
+                      new int[] {6, 4, 5,   9, 7, 8,   3, 1, 2},
+
+                      new int[] {7, 8, 9,   1, 2, 3,   4, 5, 6},
+                      new int[] {8, 9, 7,   2, 3, 1,   5, 6, 4},
+                      new int[] { 9, 7, 8, 3, 1, 2, 6, 4, 5 }
+                  });
+                Assert.False(goodSudoku1.IsValid());
+            }
+
+            [Fact]
             public void ValidatesSmallSudokuPuzzle()
+            {
+                var sudoku = new Sudoku(
+                  new int[][] {
+                      new int[] {1,2, 3,4},
+                      new int[] {2,3, 4,1},
+
+                      new int[] {3,4, 1 ,2},
+                      new int[] {4,1, 2 ,3}
+                });
+                Assert.False(sudoku.IsValid());
+            }
+
+            [Fact]
+            public void Test2()
             {
                 var goodSudoku2 = new Sudoku(
                   new int[][] {
@@ -350,7 +384,7 @@ namespace CodingKataTests
             }
 
             [Fact]
-            public void CannotContainValuesOutsideOfValidRage()
+            public void CannotContainValuesOutsideOfValidRange()
             {
                 var goodSudoku2 = new Sudoku(
                   new int[][] {
@@ -363,20 +397,37 @@ namespace CodingKataTests
                 Assert.False(goodSudoku2.IsValid());
             }
 
+
             [Fact]
             public void CannotContainNegativeValues()
             {
                 var goodSudoku2 = new Sudoku(
                   new int[][] {
-                      new int[] {-1, 4, 2,3},
-                      new int[] {3,2, 5,-1},
+                      new int[] {1, 2, 3,3},
+                      new int[] {2,2, 3,-1},
 
-                      new int[] {4,1, 3,2},
-                      new int[] {2,3, 1,4}
+                      new int[] {3,1, 3,2}
                 });
                 Assert.False(goodSudoku2.IsValid());
             }
         }
+
+        public class Rot13Tests
+        {
+            [Fact]
+            public void CorrectlyDeciphersString()
+            {
+                Assert.Equal("ROT13 example.", Rot13.Decipher("EBG13 rknzcyr."));
+            }
+
+            [Fact]
+            public void RandomExample()
+            {
+                Assert.Equal("WIOTwclVIzYpPapqb oAvaG<EFyUuy2m<LiIVMagQZG{wVjfYS", 
+                    Rot13.Decipher("dV\ajpycVmfc]ncdo bNinT<RSlbhl2`<YvVcZnt^gT{jcwsf`"));
+            }
+        }
+
 
     }
 }
