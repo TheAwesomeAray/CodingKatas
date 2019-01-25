@@ -428,6 +428,22 @@ namespace CodingKataTests
             }
         }
 
+        public class JosephusSurvivorTests
+        {
+
+            [Theory]
+            [InlineData(7, 3, 4)]
+            [InlineData(11, 19, 10)]
+            [InlineData(40, 3, 28)]
+            public void ReturnsExpectedResult(int n, int k, int expected)
+            {
+                var actual = JosephusSurvivor.FindSurvivor(n, k);
+                Assert.Equal(expected, actual);
+            }
+
+        }
+
+
 
     }
 }
