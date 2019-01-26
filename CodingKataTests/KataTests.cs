@@ -443,6 +443,18 @@ namespace CodingKataTests
 
         }
 
+        public class VolumeCalculatorTests
+        {
+            [Theory]
+            [InlineData(5, 7, 3848, 2940)]
+            [InlineData(2, 7, 3848, 907)]
+            [InlineData(80, 120, 3500, 2478)]
+            public void CalculateVolumeReturnsCorrectResult(int height, int diameter, int volumeTotal, int expected)
+            {
+                Assert.Equal(expected, VolumeCalculator.CalculateVolume(height, diameter, volumeTotal));
+            }
+        }
+
 
 
     }
