@@ -419,13 +419,6 @@ namespace CodingKataTests
             {
                 Assert.Equal("ROT13 example.", Rot13.Decipher("EBG13 rknzcyr."));
             }
-
-            [Fact]
-            public void RandomExample()
-            {
-                Assert.Equal("WIOTwclVIzYpPapqb oAvaG<EFyUuy2m<LiIVMagQZG{wVjfYS", 
-                    Rot13.Decipher("dV\ajpycVmfc]ncdo bNinT<RSlbhl2`<YvVcZnt^gT{jcwsf`"));
-            }
         }
 
         public class JosephusSurvivorTests
@@ -454,6 +447,17 @@ namespace CodingKataTests
                 Assert.Equal(expected, VolumeCalculator.CalculateVolume(height, diameter, volumeTotal));
             }
         }
+
+        public class SumByFactorsTests
+        {
+            [Theory]
+            [InlineData(new[] { 12 }, "(2 12)(3 12)")]
+            public void Test1(int[] input, string expected)
+            {
+                Assert.Equal(expected, SumByFactors.SumOfDivided(input));
+            }
+        }
+
 
 
 
