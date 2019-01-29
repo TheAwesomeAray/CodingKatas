@@ -13,11 +13,20 @@ namespace CodingKatas
 
             foreach (var prime in primes)
             {
-                if (input[0] % prime == 0)
-                    result.Add(prime, input[0]);
-            }
+                var inputSum = input.Sum();
                 
-            
+                foreach (int i in input.OrderByDescending(x => x))
+                {
+                    if (i % prime == 0)
+                    {
+                        if (inputSum % prime == 0)
+                            result.Add(prime, inputSum);
+                        else
+                            result.Add(prime, i);
+                        break;
+                    }
+                }
+            }
 
             return string.Format("({0})", string.Join(")(", result.OrderBy(x => x.Key).Select(x => new string(x.Key + " " + x.Value))));
         }

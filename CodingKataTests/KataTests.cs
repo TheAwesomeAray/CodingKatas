@@ -452,14 +452,11 @@ namespace CodingKataTests
         {
             [Theory]
             [InlineData(new[] { 12 }, "(2 12)(3 12)")]
+            [InlineData(new[] { 12, 15 }, "(2 12)(3 27)(5 15)")]
             public void Test1(int[] input, string expected)
             {
                 Assert.Equal(expected, SumByFactors.SumOfDivided(input));
             }
         }
-
-
-
-
     }
 }
