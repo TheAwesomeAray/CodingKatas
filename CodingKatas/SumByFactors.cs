@@ -7,53 +7,49 @@ public class SumOfDivided
 {
     public static string sumOfDivided(int[] input)
     {
+        Dictionary<int, int> primeFactors = new Dictionary<int, int>();
         StringBuilder bldr = new StringBuilder();
-        var primes = GetPrimes(input);
+        int max = Math.Max(Math.Abs(input.Max()), Math.Abs(input.Min()));
+        var primes = SieveofEratosthenes(max + 1);
+        foreach (var prime in primes)
+        {
+            var factors = input.Where(x => x % prime == 0);
 
-        while(primes.Count > 0)
-        { 
-            bool primeFactor = false;
-            int prime = primes.First();
-            primes.RemoveFirst();
-            var inputSum = 0;
-
-            foreach (int i in input)
-            {
-                if (i % prime == 0)
-                {
-                    primeFactor = true;
-                    inputSum += i;
-                }
-            }
-
-            if (primeFactor)
-                bldr.Append($"({prime} {inputSum})");
+            if (factors.Any())
+                primeFactors.Add(prime, factors.Sum());
         }
 
-        return bldr.ToString();
+
+
+        return string.Join("", primeFactors.OrderBy(x => x.Key).Select(x => $"({x.Key} {x.Value})"));
     }
 
-    private static LinkedList<int> GetPrimes(int[] input)
+    private static LinkedList<int> SieveofEratosthenes(int n)
     {
-        var primeList = new LinkedList<int>();
+        //Let A be an array of Boolean values, indexed by integers 2 to n,
+        //initially all set to true.
+        var a = new bool[n];
 
-        for (int x = 2; x <= Math.Max(Math.Abs(input.Max()), Math.Abs(input.Min())); x++)
+        for (int i = 2; i < n; i++)
         {
-            int isPrime = 0;
-            for (int y = 1; y < x; y++)
-            {
-                if (x % y == 0)
-                    isPrime++;
-
-                if (isPrime == 2) break;
-            }
-            if (isPrime != 2)
-                primeList.AddLast(x);
-
-            isPrime = 0;
+            a[i] = true;
         }
 
-        return primeList;
+        for (int i = 2; i < Math.Sqrt(n); i++)
+        {
+            if (a[i])
+            {
+                for (int j = (int)Math.Pow(i, 2); j < n; j = j + i)
+                    a[j] = false;
+            }
+        }
+
+        var primes = new LinkedList<int>();
+        for (int i = 2; i < a.Length; i++)
+            if (a[i])
+                primes.AddFirst(i);
+
+        return primes;
     }
 }
 
