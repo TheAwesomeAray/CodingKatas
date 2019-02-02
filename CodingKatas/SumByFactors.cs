@@ -2,51 +2,56 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CodingKatas
-{
-    public class SumByFactors
-    {
-        public static string SumOfDivided(int[] input)
-        {
-            Dictionary<int, int> result = new Dictionary<int, int>();
-            int[] primes = GetPrimes(input);
 
-            foreach (var prime in primes)
+public class SumOfDivided
+{
+    public static string sumOfDivided(int[] input)
+    {
+        Dictionary<int, int> result = new Dictionary<int, int>();
+        int[] primes = GetPrimes(input);
+
+        foreach (var prime in primes)
+        {
+            bool primeFactor = false;
+            var inputSum = 0;
+
+            foreach (int i in input)
             {
-                var inputSum = input.Sum();
-                
-                foreach (int i in input.OrderByDescending(x => x))
+                if (i % prime == 0)
                 {
-                    if (i % prime == 0)
-                    {
-                        if (inputSum % prime == 0)
-                            result.Add(prime, inputSum);
-                        else
-                            result.Add(prime, i);
-                        break;
-                    }
+                    primeFactor = true;
+                    inputSum += i;
                 }
             }
 
-            return string.Format("({0})", string.Join(")(", result.OrderBy(x => x.Key).Select(x => new string(x.Key + " " + x.Value))));
+            if (primeFactor)
+                result.Add(prime, inputSum);
         }
 
-        private static int[] GetPrimes(int[] input)
-        {
-            var primeList = new List<int>();
+        return string.Format("({0})", string.Join(")(", result.OrderBy(x => x.Key).Select(x => x.Key + " " + x.Value)));
+    }
 
-            for (int i = 2; i < Math.Abs(input.Min()); i++)
+    private static int[] GetPrimes(int[] input)
+    {
+        var primeList = new List<int>();
+
+        for (int x = 2; x <= Math.Max(Math.Abs(input.Max()), Math.Abs(input.Min())); x++)
+        {
+            int isPrime = 0;
+            for (int y = 1; y < x; y++)
             {
-                if (IsPrime(i))
-                    primeList.Add(i);
+                if (x % y == 0)
+                    isPrime++;
+
+                if (isPrime == 2) break;
             }
+            if (isPrime != 2)
+                primeList.Add(x);
 
-            return primeList.ToArray();
+            isPrime = 0;
         }
 
-        private static bool IsPrime(int i)
-        {
-            return i == 2 || i % 2 == 1;
-        }
+        return primeList.ToArray();
     }
 }
+

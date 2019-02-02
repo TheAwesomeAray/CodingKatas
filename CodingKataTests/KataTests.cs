@@ -453,9 +453,14 @@ namespace CodingKataTests
             [Theory]
             [InlineData(new[] { 12 }, "(2 12)(3 12)")]
             [InlineData(new[] { 12, 15 }, "(2 12)(3 27)(5 15)")]
+            [InlineData(new[] { 15, 21, 24, 30, 45 }, "(2 54)(3 135)(5 90)(7 21)")]
+            [InlineData(new[] { 454, 60, 398, 192, 235, 316, 464, -39, 63, 487, 334, 242, 315, 378, 186 },
+                "(2 3024)(3 1155)(5 610)(7 756)(11 242)(13 -39)(29 464)(31 186)(47 235)(79 316)(167 334)(199 398)(227 454)(487 487)")]
+            [InlineData(new[] { -29804, -4209, -28265, -72769, -31744 }, 
+                "(2 -61548)(3 -4209)(5 -28265)(23 -4209)(31 -31744)(53 -72769)(61 -4209)(1373 -72769)(5653 -28265)(7451 -29804)")]
             public void Test1(int[] input, string expected)
             {
-                Assert.Equal(expected, SumByFactors.SumOfDivided(input));
+                Assert.Equal(expected, SumOfDivided.sumOfDivided(input));
             }
         }
     }
