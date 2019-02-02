@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
 
 public class SumOfDivided
 {
     public static string sumOfDivided(int[] input)
     {
-        Dictionary<int, int> result = new Dictionary<int, int>();
-        int[] primes = GetPrimes(input);
+        StringBuilder bldr = new StringBuilder();
+        var primes = GetPrimes(input);
 
-        foreach (var prime in primes)
-        {
+        while(primes.Count > 0)
+        { 
             bool primeFactor = false;
+            int prime = primes.First();
+            primes.RemoveFirst();
             var inputSum = 0;
 
             foreach (int i in input)
@@ -25,15 +27,15 @@ public class SumOfDivided
             }
 
             if (primeFactor)
-                result.Add(prime, inputSum);
+                bldr.Append($"({prime} {inputSum})");
         }
 
-        return string.Format("({0})", string.Join(")(", result.OrderBy(x => x.Key).Select(x => x.Key + " " + x.Value)));
+        return bldr.ToString();
     }
 
-    private static int[] GetPrimes(int[] input)
+    private static LinkedList<int> GetPrimes(int[] input)
     {
-        var primeList = new List<int>();
+        var primeList = new LinkedList<int>();
 
         for (int x = 2; x <= Math.Max(Math.Abs(input.Max()), Math.Abs(input.Min())); x++)
         {
@@ -46,12 +48,12 @@ public class SumOfDivided
                 if (isPrime == 2) break;
             }
             if (isPrime != 2)
-                primeList.Add(x);
+                primeList.AddLast(x);
 
             isPrime = 0;
         }
 
-        return primeList.ToArray();
+        return primeList;
     }
 }
 
