@@ -463,5 +463,20 @@ namespace CodingKataTests
                 Assert.Equal(expected, SumOfDivided.sumOfDivided(input));
             }
         }
+
+        
+        public class RemoveUrlStringTests
+        {
+            [Theory]
+            [InlineData("www.codewars.com#about", "www.codewars.com")]
+            [InlineData("www.codewars.com/katas/?page=1#about", "www.codewars.com/katas/?page=1")]
+            [InlineData("www.codewars.com/katas/", "www.codewars.com/katas/")]
+            public void Test(string input, string expected)
+            {
+                Assert.Equal(expected, RemoveUrlAnchorKata.RemoveUrlAnchor(input));
+            }
+        }
+
+
     }
 }
