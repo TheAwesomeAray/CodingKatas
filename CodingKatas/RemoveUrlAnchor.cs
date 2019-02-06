@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CodingKatas
+﻿namespace CodingKatas
 {
     public static class RemoveUrlAnchorKata
     {

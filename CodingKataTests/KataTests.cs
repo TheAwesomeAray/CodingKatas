@@ -477,6 +477,19 @@ namespace CodingKataTests
             }
         }
 
+        public class LinearSystemsTests
+        {
+            [Theory]
+            [InlineData("1 2 0 7\r\n0 0 3 8\r\n0 5 6 9", "SOLUTION=(9,8; -1,4; 2,66666666666667)")]
+            public void TestAndVerify1(string input, string expected)
+            {
+                LinearSystem ls = new LinearSystem();
+                string actual = ls.Solve(input);
+                Assert.Equal(expected, actual);
+            }
+        }
+
+
 
     }
 }
