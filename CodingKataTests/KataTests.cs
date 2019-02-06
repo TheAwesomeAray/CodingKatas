@@ -1,7 +1,9 @@
 using CodingKatas;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Xunit;
 
 namespace CodingKataTests
@@ -456,7 +458,7 @@ namespace CodingKataTests
             [InlineData(new[] { 15, 21, 24, 30, 45 }, "(2 54)(3 135)(5 90)(7 21)")]
             [InlineData(new[] { 454, 60, 398, 192, 235, 316, 464, -39, 63, 487, 334, 242, 315, 378, 186 },
                 "(2 3024)(3 1155)(5 610)(7 756)(11 242)(13 -39)(29 464)(31 186)(47 235)(79 316)(167 334)(199 398)(227 454)(487 487)")]
-            [InlineData(new[] { -29804, -4209, -28265, -72769, -31744 }, 
+            [InlineData(new[] { -29804, -4209, -28265, -72769, -31744 },
                 "(2 -61548)(3 -4209)(5 -28265)(23 -4209)(31 -31744)(53 -72769)(61 -4209)(1373 -72769)(5653 -28265)(7451 -29804)")]
             public void Test1(int[] input, string expected)
             {
@@ -464,7 +466,7 @@ namespace CodingKataTests
             }
         }
 
-        
+
         public class RemoveUrlStringTests
         {
             [Theory]
@@ -477,19 +479,34 @@ namespace CodingKataTests
             }
         }
 
-        public class LinearSystemsTests
+        
+        public class PartsOfAListTests
         {
             [Theory]
-            [InlineData("1 2 0 7\r\n0 0 3 8\r\n0 5 6 9", "SOLUTION=(9,8; -1,4; 2,66666666666667)")]
-            public void TestAndVerify1(string input, string expected)
+            [InlineData(new[] { "cdIw", "tzIy", "xDu", "rThG" },
+                "[[cdIw, tzIy xDu rThG], [cdIw tzIy, xDu rThG], [cdIw tzIy xDu, rThG]]")]
+            [InlineData(new[] { "I", "wish", "I", "hadn't", "come" },
+                "[[I, wish I hadn't come], [I wish, I hadn't come], [I wish I, hadn't come], [I wish I hadn't, come]]")]
+            [InlineData(new[] { "vJQ", "anj", "mQDq", "sOZ" },
+                "[[vJQ, anj mQDq sOZ], [vJQ anj, mQDq sOZ], [vJQ anj mQDq, sOZ]]")]
+            public void RetrievesPartsOfAList(string[] input, string expected)
             {
-                LinearSystem ls = new LinearSystem();
-                string actual = ls.Solve(input);
-                Assert.Equal(expected, actual);
+                Assert.Equal(expected, Convert2DArrayToString(PartList.Partlist(input)));
+            }
+
+            private string Convert2DArrayToString(string[][] arr)
+            {
+                var sb = new StringBuilder();
+
+                foreach (string[] row in arr)
+                {
+                    sb.Append("[")
+                      .Append(string.Join(' ', row))
+                      .Append("]");
+                }
+
+                return sb.ToString();
             }
         }
-
-
-
     }
 }
