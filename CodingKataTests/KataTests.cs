@@ -508,13 +508,21 @@ namespace CodingKataTests
 
         public class FizzBuzzTranslatorTests
         {
-            [Fact]
-            public void Translate_GivenInput_ReturnsSameInput()
+            private string GetFizzBuzzAsString(int[] input)
             {
-                var input = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
+                string result = "";
                 for (int i = 0; i < input.Length; i++)
-                    Assert.Equal(input[i].ToString(), FizzBuzzTranslator.Translate(input[i]));
+                    result += $"{FizzBuzzTranslator.Translate(input[i])}";
+
+                return result;
+            }
+
+            [Theory]
+            [InlineData(new[] { 1 }, "1\n")]
+            [InlineData(new[] { 1, 2, 3, 4}, "1\n2\nFizz\n4\n")]
+            public void Translate_GivenInput_ReturnsSameInput(int[] input, string expected)
+            {
+                Assert.Equal(expected, GetFizzBuzzAsString(input));
             }
         }
 

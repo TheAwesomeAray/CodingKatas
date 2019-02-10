@@ -17,7 +17,10 @@ namespace CodingKatas
     {
         public static string Translate(int input)
         {
-            return input.ToString();
+            if (input % 3 == 0)
+                return "Fizz\n";
+
+            return $"{input.ToString()}\n";
         }
     }
 }
