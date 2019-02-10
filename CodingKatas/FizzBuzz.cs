@@ -33,7 +33,7 @@ namespace CodingKatas
             else if (input % 5 == 0)
                 return "Buzz";
 
-            return $"{input.ToString()}";
+            return input.ToString();
         }
     }
 }
