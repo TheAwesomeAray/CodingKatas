@@ -425,7 +425,6 @@ namespace CodingKataTests
 
         public class JosephusSurvivorTests
         {
-
             [Theory]
             [InlineData(7, 3, 4)]
             [InlineData(11, 19, 10)]
@@ -466,7 +465,6 @@ namespace CodingKataTests
             }
         }
 
-
         public class RemoveUrlStringTests
         {
             [Theory]
@@ -478,7 +476,6 @@ namespace CodingKataTests
                 Assert.Equal(expected, RemoveUrlAnchorKata.RemoveUrlAnchor(input));
             }
         }
-
         
         public class PartsOfAListTests
         {
@@ -508,5 +505,18 @@ namespace CodingKataTests
                 return sb.ToString();
             }
         }
+
+        public class FizzBuzzTranslatorTests
+        {
+            [Fact]
+            public void Translate_GivenInput_ReturnsSameInput()
+            {
+                var input = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+                for (int i = 0; i < input.Length; i++)
+                    Assert.Equal(input[i].ToString(), FizzBuzzTranslator.Translate(input[i]));
+            }
+        }
+
     }
 }
