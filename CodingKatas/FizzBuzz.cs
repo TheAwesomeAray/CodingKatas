@@ -8,19 +8,28 @@ namespace CodingKatas
     {
         public void FizzBuzz(int[] input)
         {
-            foreach (var element in input)
-                Console.WriteLine(FizzBuzzTranslator.Translate(element));
+            Console.WriteLine(FizzBuzzTranslator.Translate(input));
         }
     }
 
     public static class FizzBuzzTranslator
     {
-        public static string Translate(int input)
+        public static string Translate(int[] input)
+        {
+            var translatedInputs = new string[input.Length];
+
+            for (int i = 0; i < input.Length; i++)
+                translatedInputs[i] = TranslateElement(input[i]);
+
+            return string.Join("\n", translatedInputs);
+        }
+
+        private static string TranslateElement(int input)
         {
             if (input % 3 == 0)
-                return "Fizz\n";
+                return "Fizz";
 
-            return $"{input.ToString()}\n";
+            return $"{input.ToString()}";
         }
     }
 }
