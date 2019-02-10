@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace CodingKatas
 {
     public class FizzBuzzKata
     {
-        public void FizzBuzz(int[] input)
+        public void FizzBuzz()
         {
+            var input = Enumerable.Range(1, 100).ToArray();
             Console.WriteLine(FizzBuzzTranslator.Translate(input));
         }
     }
