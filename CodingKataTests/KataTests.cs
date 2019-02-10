@@ -512,7 +512,8 @@ namespace CodingKataTests
             [InlineData(new int[] { }, "")]
             [InlineData(new[] { 1 }, "1")]
             [InlineData(new[] { 1, 2, 3, 4}, "1\n2\nFizz\n4")]
-            [InlineData(new[] { 97, 98, 99, 100 }, "97\n98\nFizz\n100")]
+            [InlineData(new[] { 97, 98, 99, 100 }, "97\n98\nFizz\nBuzz")]
+            [InlineData(new[] { 5, 6, 7, 8, 9, 10 }, "Buzz\nFizz\n7\n8\nFizz\nBuzz")]
             public void Translate_GivenInput_ReturnsSameInput(int[] input, string expected)
             {
                 Assert.Equal(expected, FizzBuzzTranslator.Translate(input));
