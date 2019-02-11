@@ -567,6 +567,13 @@ namespace CodingKataTests
                 {
                     Assert.Equal(expected, new FizzBuzzExtraCreditTranslator().Translate(input));
                 }
+
+                [Theory]
+                [InlineData(new[] { 35, 53, 305, 503 }, "FizzBuzz\nFizzBuzz\nFizzBuzz\nFizzBuzz")]
+                public void Translate_GivenInputContainsThreeAndFive_ReturnsFizzBuzz(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzExtraCreditTranslator().Translate(input));
+                }
             }
         }
     }

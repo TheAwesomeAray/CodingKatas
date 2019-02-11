@@ -18,6 +18,8 @@ namespace CodingKatas
         {
             var stringInput = input.ToString();
 
+            if (stringInput.Contains("3") && stringInput.Contains("5"))
+                return "FizzBuzz";
             if (stringInput.Contains("3"))
                 return "Fizz";
             if (stringInput.Contains("5"))
@@ -35,7 +37,7 @@ namespace CodingKatas
                 return "FizzBuzz";
             if (input % 3 == 0)
                 return "Fizz";
-            else if (input % 5 == 0)
+            if (input % 5 == 0)
                 return "Buzz";
 
             return input.ToString();
