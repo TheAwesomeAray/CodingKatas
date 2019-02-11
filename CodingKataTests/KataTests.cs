@@ -540,6 +540,14 @@ namespace CodingKataTests
                 {
                     Assert.Equal(expected, new FizzBuzzTranslator().Translate(input));
                 }
+
+                [Theory]
+                [InlineData(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, 
+                    "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz")]
+                public void Translate_ReturnsCorrectResultForCombinedSetOfRules(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzTranslator().Translate(input));
+                }
             }
 
             public class UsingFizzBuzzExtraCreditTranslator
@@ -571,6 +579,14 @@ namespace CodingKataTests
                 [Theory]
                 [InlineData(new[] { 35, 53, 305, 503 }, "FizzBuzz\nFizzBuzz\nFizzBuzz\nFizzBuzz")]
                 public void Translate_GivenInputContainsThreeAndFive_ReturnsFizzBuzz(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzExtraCreditTranslator().Translate(input));
+                }
+
+                [Theory]
+                [InlineData(new[] { 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 },
+                    "21\n22\nFizz\n24\nBuzz\n26\n27\n28\n29\nFizz\nFizz\nFizz\nFizz\nFizz\nFizzBuzz")]
+                public void Translate_ReturnsCorrectResultForCombinedSetOfRules(int[] input, string expected)
                 {
                     Assert.Equal(expected, new FizzBuzzExtraCreditTranslator().Translate(input));
                 }
