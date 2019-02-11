@@ -20,6 +20,8 @@ namespace CodingKatas
 
             if (stringInput.Contains("3"))
                 return "Fizz";
+            if (stringInput.Contains("5"))
+                return "Buzz";
 
             return stringInput;
         }

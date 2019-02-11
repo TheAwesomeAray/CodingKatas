@@ -560,6 +560,13 @@ namespace CodingKataTests
                 {
                     Assert.Equal(expected, new FizzBuzzExtraCreditTranslator().Translate(input));
                 }
+                
+                [Theory]
+                [InlineData(new[] { 5, 15, 25, 45, 55, 605 }, "Buzz\nBuzz\nBuzz\nBuzz\nBuzz\nBuzz")]
+                public void Translate_GivenInputContainsFive_ReturnsBuzz(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzExtraCreditTranslator().Translate(input));
+                }
             }
         }
     }
