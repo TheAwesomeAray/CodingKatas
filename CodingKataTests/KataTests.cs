@@ -541,6 +541,19 @@ namespace CodingKataTests
                     Assert.Equal(expected, new FizzBuzzTranslator().Translate(input));
                 }
             }
+
+            public class UsingFizzBuzzExtraCreditTranslator
+            {
+                [Theory]
+                [InlineData(new int[] { }, "")]
+                [InlineData(new[] { 1 }, "1")]
+                [InlineData(new[] { 1, 2, 4, 6, 7, 8, 9 }, "1\n2\n4\n6\n7\n8\n9")]
+                [InlineData(new[] { 97, 98, 99, 100, 101, 102 }, "97\n98\n99\n100\n101\n102")]
+                public void Translate_GivenInputIsNotDivisibleByThreeOrFive_ReturnsSameInput(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzExtraCreditTranslator().Translate(input));
+                }
+            }
         }
     }
 }
