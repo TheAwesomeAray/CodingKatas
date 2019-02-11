@@ -5,26 +5,29 @@ namespace CodingKatas
 {
     public class FizzBuzzKata
     {
-        public void FizzBuzz()
+        public void FizzBuzz(Translator translator)
         {
             var input = Enumerable.Range(1, 100).ToArray();
-            Console.WriteLine(FizzBuzzTranslator.Translate(input));
+            Console.WriteLine(translator.Translate(input));
         }
     }
 
-    public static class FizzBuzzTranslator
+    public class FizzBuzzExtraCreditTranslator : Translator
     {
-        public static string Translate(int[] input)
+        protected override string TranslateElement(int input)
         {
-            var translatedInputs = new string[input.Length];
+            var stringInput = input.ToString();
 
-            for (int i = 0; i < input.Length; i++)
-                translatedInputs[i] = TranslateElement(input[i]);
+            if (stringInput.Contains("3"))
+                return "Fizz";
 
-            return string.Join("\n", translatedInputs);
+            return stringInput;
         }
+    }
 
-        private static string TranslateElement(int input)
+    public class FizzBuzzTranslator : Translator
+    {
+        protected override string TranslateElement(int input)
         {
             if (input % 3 == 0 && input % 5 == 0)
                 return "FizzBuzz";
@@ -35,5 +38,20 @@ namespace CodingKatas
 
             return input.ToString();
         }
+    }
+
+    public abstract class Translator
+    {
+        public string Translate(int[] input)
+        {
+            var translatedInputs = new string[input.Length];
+
+            for (int i = 0; i < input.Length; i++)
+                translatedInputs[i] = TranslateElement(input[i]);
+
+            return string.Join("\n", translatedInputs);
+        }
+
+        protected abstract string TranslateElement(int input);
     }
 }

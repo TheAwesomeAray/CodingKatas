@@ -506,20 +506,41 @@ namespace CodingKataTests
             }
         }
 
-        public class FizzBuzzTranslatorTests
+        public class FizzBuzzTests
         {
-            [Theory]
-            [InlineData(new int[] { }, "")]
-            [InlineData(new[] { 1 }, "1")]
-            [InlineData(new[] { 1, 2, 3, 4}, "1\n2\nFizz\n4")]
-            [InlineData(new[] { 97, 98, 99, 100 }, "97\n98\nFizz\nBuzz")]
-            [InlineData(new[] { 5, 6, 7, 8, 9, 10 }, "Buzz\nFizz\n7\n8\nFizz\nBuzz")]
-            [InlineData(new[] { 11, 12, 13, 14, 15, 16, 17 }, "11\nFizz\n13\n14\nFizzBuzz\n16\n17")]
-            public void Translate_GivenInput_ReturnsSameInput(int[] input, string expected)
+            public class UsingFizzBuzzTranslator
             {
-                Assert.Equal(expected, FizzBuzzTranslator.Translate(input));
+                [Theory]
+                [InlineData(new int[] { }, "")]
+                [InlineData(new[] { 1 }, "1")]
+                [InlineData(new[] { 1, 2, 4, 7 }, "1\n2\n4\n7")]
+                [InlineData(new[] { 97, 98, 101 }, "97\n98\n101")]
+                public void Translate_GivenInputIsNotDivisibleByThreeOrFive_ReturnsSameInput(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzTranslator().Translate(input));
+                }
+
+                [Theory]
+                [InlineData(new[] { 3, 6, 9, 12, 99, 102 }, "Fizz\nFizz\nFizz\nFizz\nFizz\nFizz")]
+                public void Translate_GivenInputIsDivibleByThree_ReturnsFizz(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzTranslator().Translate(input));
+                }
+
+                [Theory]
+                [InlineData(new[] { 5, 10, 20, 100, 110 }, "Buzz\nBuzz\nBuzz\nBuzz\nBuzz")]
+                public void Translate_GivenInputIsDivibleByFive_ReturnsBuzz(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzTranslator().Translate(input));
+                }
+
+                [Theory]
+                [InlineData(new[] { 15, 30, 45, 90, 450 }, "FizzBuzz\nFizzBuzz\nFizzBuzz\nFizzBuzz\nFizzBuzz")]
+                public void Translate_GivenInputIsDivibleByFiveAndThree_ReturnsFizzBuzz(int[] input, string expected)
+                {
+                    Assert.Equal(expected, new FizzBuzzTranslator().Translate(input));
+                }
             }
         }
-
     }
 }
