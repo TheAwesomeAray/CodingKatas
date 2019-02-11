@@ -555,8 +555,8 @@ namespace CodingKataTests
                 }
 
                 [Theory]
-                [InlineData(new[] { 3, 13, 23, 33, 43, 503 }, "Fizz\nFizz\nFizz\nFizz\nFizz\nFizz")]
-                public void Translate_GivenInputIsDivibleByThree_ReturnsFizz(int[] input, string expected)
+                [InlineData(new[] { 3, 13, 23, 33, 43, 403 }, "Fizz\nFizz\nFizz\nFizz\nFizz\nFizz")]
+                public void Translate_GivenInputContainsThree_ReturnsFizz(int[] input, string expected)
                 {
                     Assert.Equal(expected, new FizzBuzzExtraCreditTranslator().Translate(input));
                 }
