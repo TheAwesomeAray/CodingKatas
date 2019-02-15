@@ -1,4 +1,5 @@
 ﻿using CodingKatas;
+using System;
 using Xunit;
 
 namespace CodingKataTests
@@ -69,5 +70,17 @@ namespace CodingKataTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData("-10")]
+        [InlineData("-1")]
+        [InlineData("-90")]
+        [InlineData("-1,-2")]
+        [InlineData("-1\n-2")]
+        public void Add_NegativeNumber_ThrowsException(string input)
+        {
+            Assert.Throws<Exception>(() => new StringCalculator().Add(input));
+        }
+
     }
 }
