@@ -12,5 +12,18 @@ namespace CodingKataTests
 
             Assert.Equal(0, actual);
         }
+
+        [Theory]
+        [InlineData("1", 1)]
+        [InlineData("5", 5)]
+        [InlineData("10", 10)]
+        [InlineData("-10", -10)]
+        [InlineData("572", 572)]
+        public void Add_OneNumber_ReturnsThatNumber(string input, int expected)
+        {
+            var actual = new StringCalculator().Add(input);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
