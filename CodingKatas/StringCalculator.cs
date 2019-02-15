@@ -1,13 +1,22 @@
-﻿namespace CodingKatas
+﻿using System.Linq;
+
+namespace CodingKatas
 {
     public class StringCalculator
     {
         public int Add(string numbers)
         {
-            if (string.IsNullOrEmpty(numbers))
-                return 0;
+            var arr = numbers.Split(',');
+            int sum = 0;
+            foreach (var number in arr)
+            {
+                if (string.IsNullOrEmpty(number))
+                    break;
 
-            return int.Parse(numbers);
+                sum += int.Parse(number);
+            }
+
+            return sum;
         }
     }
 }

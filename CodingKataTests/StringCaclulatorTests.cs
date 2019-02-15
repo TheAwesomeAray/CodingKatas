@@ -25,5 +25,16 @@ namespace CodingKataTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData("1,2,3", 6)]
+        [InlineData("5, 10, 15", 30)]
+        [InlineData("-10, 10", 0)]
+        public void Add_MultipleNumbersSeparatedByComma_ReturnsSum(string input, int expected)
+        {
+            var actual = new StringCalculator().Add(input);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
