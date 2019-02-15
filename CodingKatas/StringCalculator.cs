@@ -1,12 +1,10 @@
-﻿using System.Linq;
-
-namespace CodingKatas
+﻿namespace CodingKatas
 {
     public class StringCalculator
     {
         public int Add(string numbers)
         {
-            var arr = numbers.Split(',');
+            var arr = numbers.Split(new[] { ',', '\n' });
             int sum = 0;
             foreach (var number in arr)
             {
