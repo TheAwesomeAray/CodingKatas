@@ -15,23 +15,13 @@ namespace CodingKatas
                     numbers.Length - numbers.IndexOf('\n') - 1);
             }
 
-            var arr = numbers.Split(delimeter);
-            var numbersArray = arr.Select(x => int.Parse(x));
+            var arr = numbers.Split(delimeter)
+                             .Select(x => x == "" ? 0 : int.Parse(x));
 
-            if (numbersArray.Where(x => x < 0).Any())
+            if (arr.Where(x => x < 0).Any())
                 throw new System.Exception("Negative Numbers not allowed");
-
-
-            int sum = 0;
-            foreach (var number in arr)
-            {
-                if (string.IsNullOrEmpty(number))
-                    break;
-
-                sum += int.Parse(number);
-            }
-
-            return sum;
+            
+            return arr.Sum();
         }
     }
 }
