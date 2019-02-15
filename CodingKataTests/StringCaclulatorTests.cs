@@ -58,5 +58,16 @@ namespace CodingKataTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData("//;\n1;2;3", 6)]
+        [InlineData("//;\n5;10;15", 30)]
+        [InlineData("//;\n-10;10;15", 15)]
+        public void Add_DelimeterProvided_ReturnsSum(string input, int expected)
+        {
+            var actual = new StringCalculator().Add(input);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
