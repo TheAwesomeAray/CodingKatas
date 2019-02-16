@@ -1,12 +1,16 @@
-﻿namespace CodingKatas
+﻿using System;
+
+namespace CodingKatas
 {
     public class FileLogger
     {
         private IFileWriter writer;
+        private ISystemDate date;
 
-        public FileLogger(IFileWriter writer)
+        public FileLogger(IFileWriter writer, ISystemDate date)
         {
             this.writer = writer;
+            this.date = date;
         }
 
         public void Log(string message)
@@ -16,6 +20,11 @@
                 writer.WriteToFile(message);
             }
         }
+    }
+
+    public interface ISystemDate
+    {
+        DateTime Now();
     }
 
     public interface IFileWriter
