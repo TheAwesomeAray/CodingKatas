@@ -19,21 +19,20 @@ namespace CodingKataTests
 
             fileLogger.Log(message);
 
-            writer.Verify(x => x.WriteToFile(It.Is<string>(y => y == message)));
+            writer.Verify(x => x.WriteToFile(It.Is<string>(y => y == message), It.IsAny<string>()));
         }
 
         [Fact]
         public void Log_Message_AppendsDateToFileName()
         {
-            string message = "test message";
             var writer = new Mock<IFileWriter>();
             var date = new Mock<ISystemDate>();
             date.Setup(x => x.Now()).Returns(new DateTime(1999, 05, 25));
             var fileLogger = new FileLogger(writer.Object, date.Object);
 
-            fileLogger.Log(message);
+            fileLogger.Log("");
 
-            writer.Verify(x => x.WriteToFile(It.Is<string>(y => y == message)));
+            writer.Verify(x => x.WriteToFile(It.IsAny<string>(), It.Is<string>(y => y == "log19990525.txt")));
         }
     }
 }
