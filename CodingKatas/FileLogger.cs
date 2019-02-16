@@ -16,9 +16,31 @@ namespace CodingKatas
 
         public void Log(string message)
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter("log.txt", true))
+            writer.WriteToFile(message, GetFileName());
+        }
+
+        private string GetFileName()
+        {
+            if (systemDate.Now().DayOfWeek == DayOfWeek.Saturday
+                || systemDate.Now().DayOfWeek == DayOfWeek.Sunday)
+                return "weekend.txt";
+
+            return $"log{systemDate.Now().ToString(logFileDateTimeFormat)}.txt";
+        }
+    }
+
+    public class SystemDate : ISystemDate
+    {
+        public DateTime Now() => DateTime.UtcNow;
+    }
+
+    public class FileWriter : IFileWriter
+    {
+        public void WriteToFile(string message, string fileName)
+        {
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, true))
             {
-                writer.WriteToFile(message, $"log{systemDate.Now().ToString(logFileDateTimeFormat)}.txt");
+                file.WriteLine(message);
             }
         }
     }
@@ -30,7 +52,6 @@ namespace CodingKatas
 
     public interface IFileWriter
     {
-        void WriteToFile(string message);
         void WriteToFile(string message, string fileName);
     }
 }
