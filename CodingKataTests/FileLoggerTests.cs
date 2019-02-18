@@ -54,10 +54,28 @@ namespace CodingKataTests
 
                 writer.Verify(x => x.WriteToFile(It.IsAny<string>(), It.Is<string>(y => y == "weekend.txt")));
             }
+
+            [Fact]
+            public void Log_MessageOnWeekend_RenameOldWeekendDotTxt()
+            {
+                var writer = new Mock<IFileWriter>();
+                var date = new Mock<ISystemDate>();
+                writer.Setup(w => w.FileExists(It.IsAny<string>())).Returns(true);
+                writer.Setup(w => w.GetCreationTime(It.IsAny<string>())).Returns(new DateTime(2019, 2, 9));
+                date.Setup(x => x.Now()).Returns(new DateTime(2019, 08, 24));
+                var fileLogger = new FileLogger(writer.Object, date.Object);
+
+                fileLogger.Log("");
+
+                writer.Verify(w => w.Move(It.Is<string>(y => y == "weekend.txt"), 
+                    It.Is<string>(y => y == "weekend-20190209.txt")));
+            }
         }
 
         public class IntegrationsTests : IDisposable
         {
+            private string logToCreate = "log19990525.txt";
+
             [Fact]
             public void Log_Message_WritesMessageToFile()
             {
@@ -67,13 +85,13 @@ namespace CodingKataTests
 
                 fileLogger.Log("");
 
-                Assert.True(File.Exists("log19990525.txt"));
+                Assert.True(File.Exists(logToCreate));
             }
 
             public void Dispose()
             {
-                if (File.Exists("log19990525.txt"))
-                    File.Delete("log19990525.txt");
+                if (File.Exists(logToCreate))
+                    File.Delete(logToCreate);
             }
         }
     }

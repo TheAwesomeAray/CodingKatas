@@ -7,6 +7,7 @@ namespace CodingKatas
         private IFileWriter writer;
         private ISystemDate systemDate;
         private string logFileDateTimeFormat = "yyyyMMdd";
+        private string weekendLogName = "weekend.txt";
 
         public FileLogger(IFileWriter writer, ISystemDate systemDate)
         {
@@ -16,17 +17,28 @@ namespace CodingKatas
 
         public void Log(string message)
         {
+            if (IsWeekEnd())
+            {
+                if (writer.FileExists("weekend.txt"))
+                {
+                    var createdDate = writer.GetCreationTime(weekendLogName);
+                    writer.Move("weekend.txt", $"weekend-{createdDate.ToString(logFileDateTimeFormat)}.txt");
+                }
+            }
+
             writer.WriteToFile(message, GetFileName());
         }
 
         private string GetFileName()
         {
-            if (systemDate.Now().DayOfWeek == DayOfWeek.Saturday
-                || systemDate.Now().DayOfWeek == DayOfWeek.Sunday)
-                return "weekend.txt";
-
+            if (IsWeekEnd())
+                return weekendLogName;
+            
             return $"log{systemDate.Now().ToString(logFileDateTimeFormat)}.txt";
         }
+
+        private bool IsWeekEnd() => systemDate.Now().DayOfWeek == DayOfWeek.Saturday || 
+                                    systemDate.Now().DayOfWeek == DayOfWeek.Sunday;
     }
 
     public class SystemDate : ISystemDate
@@ -36,6 +48,21 @@ namespace CodingKatas
 
     public class FileWriter : IFileWriter
     {
+        public bool FileExists(string filePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DateTime GetCreationTime(string filePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Move(string oldPath, string newPath)
+        {
+            throw new NotImplementedException();
+        }
+
         public void WriteToFile(string message, string fileName)
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName, true))
@@ -52,6 +79,9 @@ namespace CodingKatas
 
     public interface IFileWriter
     {
-        void WriteToFile(string message, string fileName);
+        void WriteToFile(string message, string filePath);
+        bool FileExists(string filePath);
+        DateTime GetCreationTime(string filePath);
+        void Move(string oldPath, string newPath);
     }
 }
