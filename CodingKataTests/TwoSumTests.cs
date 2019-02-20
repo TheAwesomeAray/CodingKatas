@@ -11,9 +11,10 @@ public class TwoSumTests
     [InlineData(new[] { 1, 0 }, 1, new[] { 0, 1 })]
     [InlineData(new[] { 1, 2, 3 }, 4, new[] { 0, 2 })]
     [InlineData(new[] { 1, 15, 25, 100 }, 125, new[] { 2, 3 })]
+    [InlineData(new[] { 1, 15, 25, 25, 100 }, 125, new[] { 2, 4 })]
     public void TwoSum_GivenArrayAndTarget_ReturnsIndicesThatEqualTarget(int[] input, int target, int[] expected)
     {
-        expected.Should().BeEquivalentTo(new TwoSumKata().TwoSum(input, target));
+        new TwoSumKata().TwoSum(input, target).Should().BeEquivalentTo(expected);
     }
 }
 

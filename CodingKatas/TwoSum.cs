@@ -24,7 +24,7 @@ namespace CodingKatas
         private int[] TwoPassHashTable(int[] nums, int target)
         {
             var numberDict = new Dictionary<int, int>();
-            //Convert int array to hashtable?
+           
             for (int i = 0; i < nums.Length && !numberDict.ContainsKey(nums[i]); i++)
                 numberDict.Add(nums[i], i);
 
@@ -38,14 +38,15 @@ namespace CodingKatas
         private int[] OnePassHashTable(int[] nums, int target)
         {
             var numberDict = new Dictionary<int, int>();
-            //Convert int array to hashtable?
-            for (int i = 0; i < nums.Length && !numberDict.ContainsKey(nums[i]); i++)
+    
+            for (int i = 0; i < nums.Length; i++)
             {
                 int complement = target - nums[i];
                 if (numberDict.ContainsKey(complement))
                     return new[] { i, numberDict[complement] };
 
-                numberDict.Add(nums[i], i);
+                if (!numberDict.ContainsKey(nums[i]))
+                    numberDict.Add(nums[i], i);
             }
 
             throw new InvalidOperationException("No Solution Exists");
