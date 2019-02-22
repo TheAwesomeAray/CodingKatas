@@ -28,7 +28,6 @@ namespace CodingKatas
                 return c - 'a' + 10;
             else
                 throw new InvalidOperationException("Invalid Hexidecimal provided.");
-            
         }
 
         private int GetStartingIndex(string input)
