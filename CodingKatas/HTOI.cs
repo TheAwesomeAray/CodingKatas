@@ -8,8 +8,32 @@ namespace CodingKatas
     {
         public double Htoi(string input)
         {
-            int i, n, hexValue;
-            i = n = hexValue = 0;
+            int n = 0;
+
+            int i = GetStartingIndex(input);
+
+            for (; i < input.Length; i++)
+                n = n * 16 + ConvertHexidecimalToInt(input[i]);
+            
+            return n;
+        }
+
+        private int ConvertHexidecimalToInt(char c)
+        {
+            if (c >= '0' && c <= '9')
+                return c - '0';
+            else if (c >= 'A' && c <= 'F')
+                return c - 'A' + 10;
+            else if (c >= 'a' && c <= 'f')
+                return c - 'a' + 10;
+            else
+                throw new InvalidOperationException("Invalid Hexidecimal provided.");
+            
+        }
+
+        private int GetStartingIndex(string input)
+        {
+            int i = 0;
 
             if (input[i] == '0')
             {
@@ -18,24 +42,7 @@ namespace CodingKatas
                     i++;
             }
 
-            for (; i < input.Length; i++)
-            {
-                if (input[i] >= '0' && input[i] <= '9')
-                    hexValue = input[i] - '0';
-                else if (input[i] >= 'A' && input[i] <= 'F')
-                    hexValue = input[i] - 'A' + 10;
-                else if (input[i] >= 'a' && input[i] <= 'f')
-                    hexValue = input[i] - 'a' + 10;
-                else
-                {
-                    n = 0;
-                    break;
-                }
-                    
-                n = n * 16 + hexValue;
-            }
-
-            return n;
+            return i;
         }
     }
 }

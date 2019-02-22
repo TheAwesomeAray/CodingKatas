@@ -1,5 +1,6 @@
 ﻿using CodingKatas;
 using FluentAssertions;
+using System;
 using Xunit;
 
 public class HtoiTests
@@ -59,7 +60,7 @@ public class HtoiTests
     [InlineData("a9b2C5`")]
     public void Htoi_GivenInvalidHexidecimal_Returns0(string input)
     {
-        new HtoiKata().Htoi(input).Should().Be(0);
+        Assert.Throws<InvalidOperationException>(() => new HtoiKata().Htoi(input));
     }
 }
 
