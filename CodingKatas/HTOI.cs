@@ -24,6 +24,8 @@ namespace CodingKatas
                     hexValue = input[i] - '0';
                 else if (input[i] >= 'A' && input[i] <= 'F')
                     hexValue = input[i] - 'A' + 10;
+                else if (input[i] >= 'a' && input[i] <= 'f')
+                    hexValue = input[i] - 'a' + 10;
 
                 n = n * 16 + hexValue;
             }
