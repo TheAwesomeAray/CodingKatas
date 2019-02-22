@@ -6,8 +6,8 @@ namespace CodingKatas
     {
         private IFileWriter writer;
         private ISystemDate systemDate;
-        private string logFileDateTimeFormat = "yyyyMMdd";
-        private string weekendLogName = "weekend.txt";
+        private readonly string logFileDateTimeFormat = "yyyyMMdd";
+        private readonly string weekendLogName = "weekend.txt";
 
         public FileLogger(IFileWriter writer, ISystemDate systemDate)
         {

@@ -211,7 +211,7 @@ namespace CodingKataTests
 
         public class PaginationHelperTests
         {
-            private List<int> collection;
+            private readonly List<int> collection;
             private PaginationHelper<int> helper;
 
             public PaginationHelperTests()

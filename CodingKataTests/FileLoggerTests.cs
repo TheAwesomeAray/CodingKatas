@@ -74,7 +74,7 @@ namespace CodingKataTests
 
         public class IntegrationsTests : IDisposable
         {
-            private string logToCreate = "log19990525.txt";
+            private readonly string logToCreate = "log19990525.txt";
 
             [Fact]
             public void Log_Message_WritesMessageToFile()

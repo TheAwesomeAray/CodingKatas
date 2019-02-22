@@ -4,7 +4,7 @@
     {
         private static int min;
         private static int max;
-        private static int ROTNumber = 13;
+        private static readonly int ROTNumber = 13;
 
         public static string Decipher(string input)
         {
