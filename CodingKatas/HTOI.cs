@@ -18,8 +18,12 @@ namespace CodingKatas
                     i++;
             }
 
-            if (input[i] >= '0' && input[i] <= '9')
-                n = input[i] - '0';
+            for (; i < input.Length; i++)
+            {
+                if (input[i] >= '0' && input[i] <= '9')
+                    n = n * 16 + input[i] - '0';
+            }
+            
 
             return n;
         }
