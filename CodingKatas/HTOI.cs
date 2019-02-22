@@ -22,6 +22,8 @@ namespace CodingKatas
             {
                 if (input[i] >= '0' && input[i] <= '9')
                     n = n * 16 + input[i] - '0';
+                else if (input[i] >= 'A' && input[i] <= 'F')
+                    n = n * 16 + input[i] - 'A' + 10;
             }
             
 
