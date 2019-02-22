@@ -34,5 +34,14 @@ public class HtoiTests
     {
         new HtoiKata().Htoi(input).Should().Be(expected);
     }
+
+    [Theory]
+    [InlineData("0xa12F", 41263)]
+    [InlineData("0x123ABc", 1194684)]
+    [InlineData("0xa9b2C5", 11121349)]
+    public void Htoi_GivenHexidecimalValue_ReturnsConvertedInteger(string input, int expected)
+    {
+        new HtoiKata().Htoi(input).Should().Be(expected);
+    }
 }
 
