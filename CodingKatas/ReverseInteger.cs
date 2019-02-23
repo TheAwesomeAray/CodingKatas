@@ -7,19 +7,20 @@ namespace CodingKatas
     {
         public int Reverse(int x)
         {
-            bool negative = x < 0;
+            int rev = 0;
+            while (x != 0)
+            {
+                int pop = x % 10;
+                x /= 10;
 
-            var arr = Math.Abs(x).ToString()
-                       .ToCharArray()
-                       .Reverse();
+                if (rev > int.MaxValue / 10 || (rev == int.MaxValue / 10 && pop > 7))
+                    return 0;
+                if (rev < int.MinValue / 10 || (rev == int.MinValue && pop < -8))
+                    return 0;
+                rev = rev * 10 + pop;
+            }
 
-            var reversedInteger = int.Parse(new string(arr.ToArray()));
-
-            if (negative)
-                return reversedInteger * -1;
-            
-
-            return reversedInteger;
+            return rev;
         }
     }
 }

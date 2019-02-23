@@ -23,5 +23,13 @@ public class ReverseIntegerTests
     {
         new ReverseIntegerKata().Reverse(input).Should().Be(expected);
     }
+
+    [Theory]
+    [InlineData(2147483648)]
+    [InlineData(8463847412)]
+    public void Reverse_GivenNumberThatWouldCauseOverflow_Returns0(int input)
+    {
+        new ReverseIntegerKata().Reverse(input).Should().Be(0);
+    }
 }
 
