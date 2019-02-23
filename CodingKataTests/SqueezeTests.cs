@@ -11,9 +11,7 @@ public class SqueezeTests
         string s1 = "123";
         string s2 = "123";
 
-        new SqueezeKata().Squeeze(s1, s2);
-
-        s1.Should().Be("");
+        new SqueezeKata().Squeeze(s1, s2).Should().Be("");
     }
 }
 
