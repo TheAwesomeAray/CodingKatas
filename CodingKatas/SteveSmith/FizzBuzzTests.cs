@@ -1,7 +1,7 @@
 ﻿using CodingKatas;
 using Xunit;
 
-namespace CodingKataTests
+namespace CodingKatas
 {
     public class FizzBuzzTests
     {
