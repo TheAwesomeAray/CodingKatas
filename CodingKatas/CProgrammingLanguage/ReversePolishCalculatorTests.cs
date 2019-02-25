@@ -25,5 +25,14 @@ namespace CodingKatas.CProgrammingLanguage
         {
             new ReversePolishCalculator().Calculate(input).Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData("2 2 *", 4)]
+        [InlineData("5 4 *", 20)]
+        [InlineData("9 9 *", 81)]
+        public void Calculate_GivenSingleDigitOperandsAndAsterisk_ReturnsProduct(string input, double expected)
+        {
+            new ReversePolishCalculator().Calculate(input).Should().Be(expected);
+        }
     }
 }

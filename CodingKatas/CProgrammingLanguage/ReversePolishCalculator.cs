@@ -23,6 +23,8 @@ namespace CodingKatas.CProgrammingLanguage
                 {
                     case "+":
                         return op1 + op2;
+                    case "*":
+                        return op1 * op2;
                     default:
                         throw new InvalidOperationException("Invalid Operator");
 
