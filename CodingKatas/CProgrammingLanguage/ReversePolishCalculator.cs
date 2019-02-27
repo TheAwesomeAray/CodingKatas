@@ -7,31 +7,32 @@ namespace CodingKatas.CProgrammingLanguage
     public class Stack
     {
         private int top;
-        private object[] values;
+        private string[] values;
 
         public Stack()
         {
             top = -1;
-            values = new object[10];
+            values = new string[10];
         }
 
-        public Stack(object[] values)
+        public Stack(string[] values)
         {
             this.values = values;
+            top = values.Length - 1;
         }
 
-        public object Pop()
+        public string Pop()
         {
-            if (top < 0)
-                throw new InvalidOperationException("Stack is empty");
-
-            return values[top--];
+            if (top >= 0)
+                return values[top--];
+            else
+                throw new InvalidOperationException("Stack Empty");
         }
 
-        public void Push(object element)
+        public void Push(string value)
         {
             if (top < values.Length - 1)
-                values[++top] = element;
+                values[++top] = value;
         }
 
         public bool IsEmpty()
@@ -39,9 +40,17 @@ namespace CodingKatas.CProgrammingLanguage
             return top < 0;
         }
 
+        public string Peek()
+        {
+            if (IsEmpty())
+                return null;
+            else
+                return values[top];
+        }
+
         private void Resize()
         {
-            var copy = new object[values.Length * 2];
+            var copy = new string[values.Length * 2];
             values.CopyTo(copy, 0);
             values = copy;
         }
@@ -49,19 +58,15 @@ namespace CodingKatas.CProgrammingLanguage
 
     public class ReversePolishCalculator
     {
-        string[] val;
-        int sp = 0;
-
         public double Calculate(string input)
         {
-            val = Split(input);
-            sp = val.Length;
+            var stack = new Stack(Split(input));
 
             for (int i = 0; i < input.Length; i++)
             {
-                double op1 = ConvertToDigit(Pop());
-                double op2 = ConvertToDigit(Pop());
-                string op = Pop();
+                double op1 = ConvertToDigit(stack.Pop());
+                double op2 = ConvertToDigit(stack.Pop());
+                string op = stack.Pop();
                 switch (op)
                 {
                     case "+":
@@ -70,7 +75,6 @@ namespace CodingKatas.CProgrammingLanguage
                         return op1 * op2;
                     default:
                         throw new InvalidOperationException("Invalid Operator");
-
                 }
             }
 
@@ -116,22 +120,6 @@ namespace CodingKatas.CProgrammingLanguage
             }
 
             return result;
-        }
-
-        private void Push(string value)
-        {
-            if (sp < val.Length - 1)
-                val[sp++] = value;
-        }
-
-        private string Pop()
-        {
-            if (sp > 0)
-                return val[--sp];
-            else
-                throw new InvalidOperationException("Stack Empty");
-
-            
         }
     }
 }
