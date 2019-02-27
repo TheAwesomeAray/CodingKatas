@@ -4,6 +4,49 @@ using System.Text;
 
 namespace CodingKatas.CProgrammingLanguage
 {
+    public class Stack
+    {
+        private int top;
+        private object[] values;
+
+        public Stack()
+        {
+            top = -1;
+            values = new object[10];
+        }
+
+        public Stack(object[] values)
+        {
+            this.values = values;
+        }
+
+        public object Pop()
+        {
+            if (top < 0)
+                throw new InvalidOperationException("Stack is empty");
+
+            return values[top--];
+        }
+
+        public void Push(object element)
+        {
+            if (top < values.Length - 1)
+                values[++top] = element;
+        }
+
+        public bool IsEmpty()
+        {
+            return top < 0;
+        }
+
+        private void Resize()
+        {
+            var copy = new object[values.Length * 2];
+            values.CopyTo(copy, 0);
+            values = copy;
+        }
+    }
+
     public class ReversePolishCalculator
     {
         string[] val;
@@ -29,8 +72,6 @@ namespace CodingKatas.CProgrammingLanguage
                         throw new InvalidOperationException("Invalid Operator");
 
                 }
-
-                return op1 + op2;
             }
 
             return 0;
