@@ -72,9 +72,13 @@ namespace CodingKatas.CProgrammingLanguage
                     switch (result[i])
                     {
                         case "+":
-                            return stack.Pop() + stack.Pop();
+                            stack.Push(stack.Pop() + stack.Pop());
+                            break;
                         case "*":
-                            return stack.Pop() * stack.Pop();
+                            stack.Push(stack.Pop() * stack.Pop());
+                            break;
+                        case "\n":
+                            return stack.Pop();
                         default:
                             throw new InvalidOperationException("Invalid Operator");
                     }
