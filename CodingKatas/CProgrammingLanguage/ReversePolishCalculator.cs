@@ -7,21 +7,21 @@ namespace CodingKatas.CProgrammingLanguage
     public class Stack
     {
         private int top;
-        private string[] values;
+        private double[] values;
 
         public Stack()
         {
             top = -1;
-            values = new string[10];
+            values = new double[10];
         }
 
-        public Stack(string[] values)
+        public Stack(double[] values)
         {
             this.values = values;
             top = values.Length - 1;
         }
 
-        public string Pop()
+        public double Pop()
         {
             if (top >= 0)
                 return values[top--];
@@ -29,7 +29,7 @@ namespace CodingKatas.CProgrammingLanguage
                 throw new InvalidOperationException("Stack Empty");
         }
 
-        public void Push(string value)
+        public void Push(double value)
         {
             if (top < values.Length - 1)
                 values[++top] = value;
@@ -40,7 +40,7 @@ namespace CodingKatas.CProgrammingLanguage
             return top < 0;
         }
 
-        public string Peek()
+        public double? Peek()
         {
             if (IsEmpty())
                 return null;
@@ -50,7 +50,7 @@ namespace CodingKatas.CProgrammingLanguage
 
         private void Resize()
         {
-            var copy = new string[values.Length * 2];
+            var copy = new double[values.Length * 2];
             values.CopyTo(copy, 0);
             values = copy;
         }
@@ -60,40 +60,58 @@ namespace CodingKatas.CProgrammingLanguage
     {
         public double Calculate(string input)
         {
-            var stack = new Stack(Split(input));
+            var result = Split(input);
+            var stack = new Stack();
 
-            for (int i = 0; i < input.Length; i++)
+            for (int i = 0; i < result.Length; i++)
             {
-                double op1 = ConvertToDigit(stack.Pop());
-                double op2 = ConvertToDigit(stack.Pop());
-                string op = stack.Pop();
-                switch (op)
+                if (IsDigit(result[i]))
+                    stack.Push(ConvertToDigit(result[i]));
+                else
                 {
-                    case "+":
-                        return op1 + op2;
-                    case "*":
-                        return op1 * op2;
-                    default:
-                        throw new InvalidOperationException("Invalid Operator");
+                    switch (result[i])
+                    {
+                        case "+":
+                            return stack.Pop() + stack.Pop();
+                        case "*":
+                            return stack.Pop() * stack.Pop();
+                        default:
+                            throw new InvalidOperationException("Invalid Operator");
+                    }
                 }
+                
             }
 
             return 0;
+        }
+
+        private bool IsDigit(string s)
+        {
+            int decimalCount = 0;
+            for (int i = 0; i < s.Length; i++)
+                if (!char.IsDigit(s[i]) || decimalCount > 1)
+                    return false;
+                else if (s[i] == '.')
+                    decimalCount++;
+
+            return true;
         }
 
         private string[] Split(string input)
         {
             int spaceCount = GetSpaceCount(input);
             string[] result = new string[spaceCount + 1];
-            int j = input.Length - 1;
-            for(int i = 0; i < result.Length; i++)
+            int j = 0;
+            for (int i = 0; i < result.Length; i++)
             {
                 string expressionComponent = "";
-                for (; j >= 0 && input[j] != ' '; j--)
+                
+                for (; j < input.Length && input[j] != ' '; j++)
                 {
                     expressionComponent += input[j];
                 }
-                    j--;
+
+                j++;
 
                 result[i] = expressionComponent;
             }
@@ -114,7 +132,7 @@ namespace CodingKatas.CProgrammingLanguage
         private double ConvertToDigit(string input)
         {
             double result = 0;
-            for (int i = input.Length - 1; i >= 0; i--)
+            for (int i = 0; i < input.Length; i++)
             {
                 result = result * 10 + input[i] - '0';
             }
