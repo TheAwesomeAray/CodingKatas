@@ -34,5 +34,12 @@ namespace CodingKatas.CProgrammingLanguage
         {
             new ReversePolishCalculator().Calculate(input).Should().Be(expected);
         }
+
+        [Theory]
+        [InlineData("1 2 + 4 5 + * \n", 27)]
+        public void Calculate_GivenMultipleOperations_ReturnsExpressionResult(string input, double expected)
+        {
+            new ReversePolishCalculator().Calculate(input).Should().Be(expected);
+        }
     }
 }
