@@ -4,12 +4,23 @@
     {
         public int Atoi(string input)
         {
-            int result = input[0] - '0';
+            int result, sign, i;
+            result = i = sign = 0;
 
-            for (int i = 1; i < input.Length; i++)
+            if (input[0] == '-')
+            {
+                sign = -1;
+                i++;
+            }
+            else
+                sign = 1;
+
+            result = input[i++] - '0';
+
+            for (; i < input.Length; i++)
                 result = result * 10 + input[i] - '0';
 
-            return result;
+            return result * sign;
         }
     }
 }
