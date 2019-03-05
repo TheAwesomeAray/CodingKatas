@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CodingKatas.LeetCoders
+﻿namespace CodingKatas.LeetCoders
 {
     public class AtoiKata
     {
         public int Atoi(string input)
         {
-            var character = input[0];
+            int result = input[0] - '0';
 
-            return character - '0';
+            for (int i = 1; i < input.Length; i++)
+                result = result * 10 + input[i] - '0';
+
+            return result;
         }
     }
 }
