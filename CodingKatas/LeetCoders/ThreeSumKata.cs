@@ -10,34 +10,42 @@ namespace CodingKatas.LeetCoders
         public int[][] ThreeSum(int[] input)
         {
             List<int[]> solutions = new List<int[]>();
+            if (input.Length <= 2)
+                return solutions.ToArray(); //If we don't have even three numbers, return
 
-            for (int i = 0; i < input.Length; i++)
+            Array.Sort(input);
+            
+            //Since we need a minimum of three numbers, we can stop 3 prior to the end
+            for (int i = 0; i < input.Length - 2; i++) 
             {
-                int first = input[i];
+                int a = input[i];
+                if (a > 0) break; //Since we need to equal zero, if a is already positive, 
+                //gathering three numbers that equal zero will be impossible, and we should return.
 
-                for (int j = i + 1; j < input.Length; j++)
+                //If we are not within the first iteration of the loop, and the current value and last value are
+                //the same, we can skip this iteration because we are guaranteed to already have the solution recorded
+                if (i > 0 && a == input[i - 1])
+                    continue;
+
+                for (int j = i + 1, k = input.Length; j < k;)
                 {
-                    int second = input[j];
+                    int b = input[j];
+                    int c = input[k];
 
-                    for (int t = j + 1; t < input.Length; t++)
+                    int value = a + b + c;
+
+                    if (value == 0)
                     {
-                        if (first + second + input[t] == 0)
-                        {
-                            bool copy = false;
-
-                            var potentialSolution = new int[] { first, second, input[t] };
-                            Array.Sort(potentialSolution);
-                            foreach (var solution in solutions)
-                            {
-                                if (potentialSolution.SequenceEqual(solution))
-                                    copy = true;
-                            }
-                                
-                            if (!copy)
-                                solutions.Add(potentialSolution);
-                        }
-
+                        solutions.Add(new int[] { a, b, c });
+                        while (j < k && b == input[++j])
+                            ;
+                        while (j < k && c == input[--k])
+                            ;
                     }
+                    else if (value > 0)
+                        k--;
+                    else
+                        j++;
                 }
             }
 
