@@ -27,7 +27,7 @@ namespace CodingKatas.LeetCoders
                 if (i > 0 && a == input[i - 1])
                     continue;
 
-                for (int j = i + 1, k = input.Length; j < k;)
+                for (int j = i + 1, k = input.Length - 1; j < k;)
                 {
                     int b = input[j];
                     int c = input[k];
@@ -43,7 +43,7 @@ namespace CodingKatas.LeetCoders
                             ;
                     }
                     else if (value > 0)
-                        k--;
+                        k--; //Too far! We went negative! Lets try incrementing j instead to bring us closer to 0
                     else
                         j++;
                 }
