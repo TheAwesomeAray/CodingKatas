@@ -37,7 +37,8 @@ namespace CodingKatas.LeetCoders
                     if (value == 0)
                     {
                         solutions.Add(new int[] { a, b, c });
-                        while (j < k && b == input[++j])
+                        //If the value is the same, we already have the solution involving it. Any combo found would be a duplicate
+                        while (j < k && b == input[++j]) 
                             ;
                         while (j < k && c == input[--k])
                             ;
