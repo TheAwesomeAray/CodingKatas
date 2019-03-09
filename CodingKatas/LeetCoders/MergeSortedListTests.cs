@@ -13,7 +13,5 @@ namespace CodingKatas.LeetCoders
         {
             new MergeSortedListKata().Merge(a.ToList(), b.ToList()).Should().BeEquivalentTo(expected.ToList());
         }
-
-        public void 
     }
 }
