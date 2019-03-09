@@ -6,7 +6,7 @@ namespace CodingKatas.LeetCoders
 {
     public class MergeSortedListKata
     {
-        public List<int> Sort(List<int> a, List<int> b)
+        public List<int> Merge(List<int> a, List<int> b)
         {
             var mergedList = new List<int>();
             int i = 0, j = 0;
@@ -34,7 +34,6 @@ namespace CodingKatas.LeetCoders
                     mergedList.Add(b[j++]);
             
             }
-                
             
             return mergedList;
         }
