@@ -37,5 +37,30 @@ namespace CodingKatas.LeetCoders
             
             return mergedList;
         }
+
+        public LinkedListNode<int> Merge(LinkedListNode<int> a, LinkedListNode<int> b)
+        {
+            if (a == null)
+                return b;
+            if (b == null)
+                return a;
+
+            LinkedListNode<int> mergeHead;
+
+            if (a.Value < b.Value)
+            {
+                mergeHead = a;
+                var nextNode = mergeHead.Next;
+                nextNode = Merge(a.Next, b);
+            }
+            else
+            {
+                mergeHead = b;
+                var nextNode = mergeHead.Next;
+                nextNode = Merge(a, b.Next);
+            }
+
+            return mergeHead;
+        }
     }
 }
