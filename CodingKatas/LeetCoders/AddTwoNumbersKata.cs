@@ -12,11 +12,10 @@ namespace CodingKatas.LeetCoders
             var bEnum = b.GetEnumerator();
             LinkedList<int> result = new LinkedList<int>();
 
-
-            aEnum.MoveNext();
-            bEnum.MoveNext();
-
-            result.AddFirst(aEnum.Current + bEnum.Current);
+            while (aEnum.MoveNext() && bEnum.MoveNext())
+            {
+                result.AddFirst(aEnum.Current + bEnum.Current);
+            }
 
             return result;
         }
