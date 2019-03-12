@@ -12,17 +12,11 @@ namespace CodingKatas.LeetCoders
             var bEnum = b.GetEnumerator();
             LinkedList<int> result = new LinkedList<int>();
 
-            while (aEnum.MoveNext())
-            //bool carry = false;
-            int intermediateSum = aEnum.Current + bEnum.Current;
 
-            if (intermediateSum > 9)
-            {
-                result.AddFirst(intermediateSum % 10);
-                //carry = true;
-            }
-            else
-                result.AddFirst(intermediateSum);
+            aEnum.MoveNext();
+            bEnum.MoveNext();
+
+            result.AddFirst(aEnum.Current + bEnum.Current);
 
             return result;
         }

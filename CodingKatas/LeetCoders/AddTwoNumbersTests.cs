@@ -8,7 +8,7 @@ namespace CodingKatas.LeetCoders
     public class AddTwoNumbersTests
     {
         [Theory]
-        [InlineData(new[] { 3, 4, 2}, new[] { 5, 6, 4 }, new[] { 7, 0, 8 })]
+        [InlineData(new[] { 3 }, new[] { 5 }, new[] { 8 })]
         public void AddTwoNumbers_ShouldReturnReversedLinkedListContainingSum(int[] a, int[] b, int[] c)
         {
             var list1 = new LinkedList<int>(a.ToList());
