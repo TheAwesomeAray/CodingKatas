@@ -11,7 +11,7 @@ namespace CodingKatas.LeetCoders
         [InlineData(new[] { 3 }, new[] { 5 }, new[] { 8 })]
         [InlineData(new[] { 3, 5 }, new[] { 5, 3 }, new[] { 8, 8 })]
         [InlineData(new[] { 2, 3 }, new[] { 5, 1 }, new[] { 7, 4 })]
-        [InlineData(new[] { 7, 2, 3 }, new[] { 5, 1 }, new[] { 7, 7, 4 })]
+        [InlineData(new[] { 2, 4, 3 }, new[] { 5, 6, 4 }, new[] { 7, 0, 8 })]
         public void AddTwoNumbers_ShouldReturnReversedLinkedListContainingSum(int[] a, int[] b, int[] c)
         {
             var list1 = new LinkedList<int>(a.ToList());
