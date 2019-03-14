@@ -77,7 +77,7 @@ namespace CodingKatas.SteveSmith
                 if (attack.Attacker.Level - target.Level >= 5)
                     attack.Damage += (int)(attack.Damage * .5);
                 else if (attack.Attacker.Level - target.Level <= -5)
-                    attack.Damage += (int)(attack.Damage * .5);
+                    attack.Damage -= (int)(attack.Damage * .5);
             }
         }
 

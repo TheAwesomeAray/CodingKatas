@@ -111,10 +111,21 @@ namespace CodingKatas.SteveSmith
             attackingCharacter.LevelUp(5);
             var defendingCharacter = new Character();
             
-
             attackingCharacter.Attack(defendingCharacter);
 
             defendingCharacter.Health.Should().Be(700);
+        }
+
+        [Fact]
+        public void Attack_Attacker5LevelsLower_Deals50PercenLessDamage()
+        {
+            var attackingCharacter = new Character();
+            var defendingCharacter = new Character();
+            defendingCharacter.LevelUp(5);
+
+            attackingCharacter.Attack(defendingCharacter);
+
+            defendingCharacter.Health.Should().Be(900);
         }
     }
 }
