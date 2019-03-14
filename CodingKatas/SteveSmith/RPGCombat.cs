@@ -15,14 +15,12 @@ namespace CodingKatas.SteveSmith
             private List<AttackStatusRule> Rules = new List<AttackStatusRule>()
             {
                 new DeathStatusRule(),
-                new LevelModifierStatusRule()
+                new LevelModifierStatusRule(),
+                new SelfDamageStatusRule()
             };
 
             public void Attack(Character target)
             {
-                if (Equals(target))
-                    return;
-
                 var attack = new AttackEvent(200, this);
                 
                 target.Defend(attack);
@@ -77,6 +75,18 @@ namespace CodingKatas.SteveSmith
                     attack.Damage += (int)(attack.Damage * .5);
             }
         }
+
+        public class SelfDamageStatusRule : AttackStatusRule
+        {
+            public int Priority => 0;
+
+            public void ApplyRule(AttackEvent attack, Character target)
+            {
+                if (attack.Attacker.Equals(target))
+                    attack.Damage = 0;
+            }
+        }
+
 
 
 
