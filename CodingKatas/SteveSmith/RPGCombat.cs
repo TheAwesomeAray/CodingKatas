@@ -12,6 +12,11 @@ namespace CodingKatas.SteveSmith
             public int Health { get; private set; } = 1000;
             public int Level { get; private set; } = 1;
 
+            public void LevelUp(int increaseAmount)
+            {
+                Level += increaseAmount;
+            }
+
             private List<AttackStatusRule> Rules = new List<AttackStatusRule>()
             {
                 new DeathStatusRule(),
