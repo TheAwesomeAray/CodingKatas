@@ -10,6 +10,9 @@
 
             public void Attack(Character target)
             {
+                if (Equals(target))
+                    return;
+
                 target.Health -= 200;
 
                 if (target.Health <= 0)
@@ -18,6 +21,9 @@
 
             public void Heal(Character target)
             {
+                if (!target.Alive || !Equals(target))
+                    return;
+
                 if (target.Health + 200 > 1000)
                     target.Health = 1000;
                 else

@@ -64,5 +64,44 @@ namespace CodingKatas.SteveSmith
 
             targetCharacter.Alive.Should().Be(false);
         }
+
+        [Fact]
+        public void Heal_CannotHealDeadCharacters()
+        {
+            var attackingCharacter = new Character();
+            var targetCharacter = new Character();
+
+            attackingCharacter.Attack(targetCharacter);
+            attackingCharacter.Attack(targetCharacter);
+            attackingCharacter.Attack(targetCharacter);
+            attackingCharacter.Attack(targetCharacter);
+            attackingCharacter.Attack(targetCharacter);
+
+            targetCharacter.Heal(targetCharacter);
+
+            targetCharacter.Health.Should().Be(0);
+        }
+
+        [Fact]
+        public void Attack_CannotDealDamageToAttacker()
+        {
+            var attackingCharacter = new Character();
+
+            attackingCharacter.Attack(attackingCharacter);
+
+            attackingCharacter.Health.Should().Be(1000);
+        }
+
+        [Fact]
+        public void Heal_CanOnlyHealSelf()
+        {
+            var attackingCharacter = new Character();
+            var character = new Character();
+
+            attackingCharacter.Attack(character);
+            attackingCharacter.Heal(character);
+
+            character.Health.Should().Be(800);
+        }
     }
 }
