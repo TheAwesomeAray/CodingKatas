@@ -26,9 +26,6 @@ namespace CodingKatas.SteveSmith
                 var attack = new AttackEvent(200, this);
                 
                 target.Defend(attack);
-
-                if (target.Health <= 0)
-                    target.Alive = false;
             }
 
             private  void Defend(AttackEvent attack)
