@@ -28,15 +28,15 @@ namespace CodingKatas.SteveSmith
         }
 
         [Fact]
-        public void Heal_IncreasesHealthOfTargetCharacter()
+        public void Heal_IncreasesHealthOfSelf()
         {
             var healingCharacter = new Character();
-            var targetCharacter = new Character();
-            healingCharacter.Attack(targetCharacter);
+            var attackingCharacter = new Character();
+            attackingCharacter.Attack(healingCharacter);
             
-            healingCharacter.Heal(targetCharacter);
+            healingCharacter.Heal(healingCharacter);
 
-            targetCharacter.Health.Should().Be(1000);
+            healingCharacter.Health.Should().Be(1000);
         }
 
         [Fact]
