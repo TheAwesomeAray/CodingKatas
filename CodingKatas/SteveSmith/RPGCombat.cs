@@ -11,6 +11,8 @@ namespace CodingKatas.SteveSmith
             public bool Alive { get; internal set; } = true;
             public int Health { get; private set; } = 1000;
             public int Level { get; private set; } = 1;
+            public Location Location { get; set; } = new Location(1, 1);
+            public CharacterClass Class { get; set; } 
 
             public void LevelUp(int increaseAmount)
             {
@@ -21,7 +23,8 @@ namespace CodingKatas.SteveSmith
             {
                 new DeathStatusRule(),
                 new LevelModifierStatusRule(),
-                new SelfDamageStatusRule()
+                new SelfDamageStatusRule(),
+                new InRangeStatusRule()
             };
 
             public void Attack(Character target)
@@ -92,9 +95,30 @@ namespace CodingKatas.SteveSmith
             }
         }
 
+        public class InRangeStatusRule : AttackStatusRule
+        {
+            public int Priority => 0;
+
+            public void ApplyRule(AttackEvent attack, Character target)
+            {
+                var distanceBetween = attack.Attacker.Location.DistanceBetween(target.Location);
+
+                if (distanceBetween > attack.Attacker.Class?.MaxRange)
+                    attack.Damage = 0;
+            }
+        }
 
 
+        public interface CharacterClass
+        {
+            int MaxRange { get; }
+        }
 
+        public class Melee : CharacterClass
+        {
+            public int MaxRange => 2;
+        }
+        
         public class AttackEvent
         {
             public readonly Character Attacker;
@@ -106,6 +130,27 @@ namespace CodingKatas.SteveSmith
                 Damage = damage;
             }
         }
+
+        public class Location
+        {
+            public Location(int x, int y)
+            {
+                X = x;
+                Y = y;
+            }
+
+            public Location()
+            { }
+
+            public int X { get; set; }
+            public int Y { get; set; }
+
+            public double DistanceBetween(Location location)
+            {
+                return Math.Sqrt(Math.Pow(location.X - X, 2) + Math.Pow(location.Y - Y, 2));
+            }
+        }
+
 
     }
 }
