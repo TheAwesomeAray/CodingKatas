@@ -210,6 +210,21 @@ namespace CodingKatas.SteveSmith
 
                 ally.Health.Should().Be(1000);
             }
+
+            [Fact]
+            public void Allies_CanHealEachOther()
+            {
+                var character = new Character();
+                var ally = new Character();
+                character.Attack(ally);
+                var faction = new Faction();
+                character.Join(faction);
+                ally.Join(faction);
+
+                character.Heal(ally);
+
+                ally.Health.Should().Be(1000);
+            }
         }
 
         

@@ -51,7 +51,7 @@ namespace CodingKatas.SteveSmith
 
             public void Heal(Character target)
             {
-                if (!target.Alive || !Equals(target))
+                if (!target.Alive || !IsAlly(target) && !Equals(target))
                     return;
 
                 if (target.Health + 200 > 1000)
