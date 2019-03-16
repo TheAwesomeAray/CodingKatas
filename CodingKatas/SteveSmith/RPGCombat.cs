@@ -63,6 +63,11 @@ namespace CodingKatas.SteveSmith
             {
                 Faction = faction;
             }
+
+            internal bool IsAlly(Character ally)
+            {
+                return ally.Faction.Equals(Faction);
+            }
         }
 
         public interface AttackStatusRule
@@ -167,9 +172,14 @@ namespace CodingKatas.SteveSmith
             }
         }
 
-        public class Faction
+        public class Faction : IEquatable<Faction>
         {
             public string Name { get; set; }
+
+            public bool Equals(Faction other)
+            {
+                return other.Name == Name;
+            }
         }
 
         public class NoFaction

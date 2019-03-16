@@ -183,6 +183,19 @@ namespace CodingKatas.SteveSmith
 
                 character.Faction.Should().Be(faction);
             }
+
+            [Fact]
+            public void Characters_InSameFaction_AreAllies()
+            {
+                var character = new Character();
+                var ally = new Character();
+                var faction = new Faction();
+
+                character.Join(faction);
+                ally.Join(faction);
+
+                character.IsAlly(ally).Should().Be(true);
+            }
         }
 
         
