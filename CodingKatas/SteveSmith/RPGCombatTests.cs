@@ -172,6 +172,17 @@ namespace CodingKatas.SteveSmith
 
                 character.Faction.Should().Be(NoFaction.Instance);
             }
+
+            [Fact]
+            public void Character_CanJoinFaction()
+            {
+                var character = new Character();
+                var faction = new Faction();
+
+                character.Join(faction);
+
+                character.Faction.Should().Be(faction);
+            }
         }
 
         

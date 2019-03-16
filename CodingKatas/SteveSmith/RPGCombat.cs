@@ -40,7 +40,7 @@ namespace CodingKatas.SteveSmith
                 target.Defend(attack);
             }
 
-            private  void Defend(AttackEvent attack)
+            private void Defend(AttackEvent attack)
             {
                 foreach (var rules in Rules.OrderBy(x => x.Priority))
                     rules.ApplyRule(attack, this);
@@ -57,6 +57,11 @@ namespace CodingKatas.SteveSmith
                     target.Health = 1000;
                 else
                     target.Health += 200;
+            }
+
+            public void Join(Faction faction)
+            {
+                Faction = faction;
             }
         }
 
