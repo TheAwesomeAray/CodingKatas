@@ -51,6 +51,7 @@ namespace CodingKatas.SteveSmith
 
             public void Heal(Character target)
             {
+                //TODO: Probably should create rule set similar to attacks at this point
                 if (!target.Alive || !IsAlly(target) && !Equals(target))
                     return;
 
