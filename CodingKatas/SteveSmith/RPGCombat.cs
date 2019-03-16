@@ -12,7 +12,13 @@ namespace CodingKatas.SteveSmith
             public int Health { get; private set; } = 1000;
             public int Level { get; private set; } = 1;
             public Location Location { get; set; } = new Location(1, 1);
-            public CharacterClass Class { get; set; } 
+            public Faction Faction { get; set; }
+            public CharacterClass Class { get; set; }
+
+            public Character()
+            {
+                Faction = NoFaction.Instance;
+            }
 
             public void LevelUp(int increaseAmount)
             {
@@ -118,7 +124,12 @@ namespace CodingKatas.SteveSmith
         {
             public int MaxRange => 2;
         }
-        
+
+        public class Range : CharacterClass
+        {
+            public int MaxRange => 20;
+        }
+
         public class AttackEvent
         {
             public readonly Character Attacker;
@@ -150,6 +161,30 @@ namespace CodingKatas.SteveSmith
                 return Math.Sqrt(Math.Pow(location.X - X, 2) + Math.Pow(location.Y - Y, 2));
             }
         }
+
+        public class Faction
+        {
+            public string Name { get; set; }
+        }
+
+        public class NoFaction
+        {
+            private static Faction _instance;
+
+            public static Faction Instance
+            {
+                get
+                {
+                    if (_instance == null)
+                        _instance = new Faction() { Name = "No Faction" };
+
+                    return _instance;
+                }
+            }
+        }
+
+
+
 
 
     }

@@ -149,7 +149,29 @@ namespace CodingKatas.SteveSmith
 
         public class RangeCharacter
         {
+            [Fact]
+            public void Attack_OutsideOfMaxRange_DealsZeroDamage()
+            {
+                var attackingCharacter = new Character();
+                attackingCharacter.Class = new Range();
+                attackingCharacter.Location = new Location(25, 1);
+                var defendingCharacter = new Character();
 
+                attackingCharacter.Attack(defendingCharacter);
+
+                defendingCharacter.Health.Should().Be(1000);
+            }
+        }
+
+        public class Factions
+        {
+            [Fact]
+            public void NewlyCreatedCharacter_HasNoFaction()
+            {
+                var character = new Character();
+
+                character.Faction.Should().Be(NoFaction.Instance);
+            }
         }
 
         
