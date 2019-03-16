@@ -196,6 +196,20 @@ namespace CodingKatas.SteveSmith
 
                 character.IsAlly(ally).Should().Be(true);
             }
+
+            [Fact]
+            public void Allies_CannotDamageEachOther()
+            {
+                var character = new Character();
+                var ally = new Character();
+                var faction = new Faction();
+                character.Join(faction);
+                ally.Join(faction);
+
+                character.Attack(ally);
+
+                ally.Health.Should().Be(1000);
+            }
         }
 
         

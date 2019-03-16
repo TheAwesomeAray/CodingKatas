@@ -30,7 +30,8 @@ namespace CodingKatas.SteveSmith
                 new DeathStatusRule(),
                 new LevelModifierStatusRule(),
                 new SelfDamageStatusRule(),
-                new InRangeStatusRule()
+                new InRangeStatusRule(),
+                new AllyDamageRule()
             };
 
             public void Attack(Character target)
@@ -84,6 +85,17 @@ namespace CodingKatas.SteveSmith
             {
                 if (target.Health - attack.Damage <= 0)
                     target.Alive = false;
+            }
+        }
+
+        public class AllyDamageRule : AttackStatusRule
+        {
+            public int Priority => 0;
+
+            public void ApplyRule(AttackEvent attack, Character target)
+            {
+                if (target.IsAlly(attack.Attacker))
+                    attack.Damage = 0;
             }
         }
 
@@ -178,7 +190,10 @@ namespace CodingKatas.SteveSmith
 
             public bool Equals(Faction other)
             {
-                return other.Name == Name;
+                if (base.Equals(NoFaction.Instance))
+                    return false;
+                else
+                    return base.Equals(other);
             }
         }
 
