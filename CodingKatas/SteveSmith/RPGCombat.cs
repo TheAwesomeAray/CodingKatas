@@ -222,10 +222,14 @@ namespace CodingKatas.SteveSmith
         public class Prop : ITargetable
         {
             public int Health { get; private set; } = 1000;
+            public bool Destroyed { get; private set; }
 
             public void Defend(AttackEvent attack)
             {
                 Health -= attack.Damage;
+
+                if (Health <= 0)
+                    Destroyed = true;
             }
         }
     }

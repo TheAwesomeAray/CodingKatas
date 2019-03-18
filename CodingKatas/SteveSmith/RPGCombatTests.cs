@@ -239,6 +239,21 @@ namespace CodingKatas.SteveSmith
 
                 prop.Health.Should().Be(800);
             }
+
+            [Fact]
+            public void Prop_WhenReducedTo0Health_IsDestroyed()
+            {
+                var prop = new Prop();
+                var character = new Character();
+
+                character.Attack(prop);
+                character.Attack(prop);
+                character.Attack(prop);
+                character.Attack(prop);
+                character.Attack(prop);
+
+                prop.Destroyed.Should().BeTrue();
+            }
         }
     }
 }
