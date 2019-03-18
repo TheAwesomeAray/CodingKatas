@@ -254,15 +254,6 @@ namespace CodingKatas.SteveSmith
 
                 prop.Destroyed.Should().BeTrue();
             }
-
-            [Fact]
-            public void Prop_CanHaveNameAndHealthInitialized()
-            {
-                var prop = new Prop("Tree", 2000);
-
-                prop.Health.Should().Be(2000);
-                prop.Name.Should().Be("Tree");
-            }
         }
     }
 }
