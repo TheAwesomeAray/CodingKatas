@@ -6,7 +6,7 @@ namespace CodingKatas.SteveSmith
 {
     public class RPGCombat
     {
-        public class Character
+        public class Character : ITargetable
         {
             public bool Alive { get; internal set; } = true;
             public int Health { get; private set; } = 1000;
@@ -34,6 +34,7 @@ namespace CodingKatas.SteveSmith
                 new AllyDamageRule()
             };
 
+
             public void Attack(Character target)
             {
                 var attack = new AttackEvent(200, this);
@@ -41,7 +42,7 @@ namespace CodingKatas.SteveSmith
                 target.Defend(attack);
             }
 
-            private void Defend(AttackEvent attack)
+            public void Defend(AttackEvent attack)
             {
                 foreach (var rules in Rules.OrderBy(x => x.Priority))
                     rules.ApplyRule(attack, this);
@@ -136,8 +137,7 @@ namespace CodingKatas.SteveSmith
                     attack.Damage = 0;
             }
         }
-
-
+        
         public interface CharacterClass
         {
             int MaxRange { get; }
@@ -214,9 +214,10 @@ namespace CodingKatas.SteveSmith
             }
         }
 
-
-
-
+        public interface ITargetable
+        {
+            void Defend(AttackEvent attack);
+        }
 
     }
 }
