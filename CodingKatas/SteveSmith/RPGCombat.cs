@@ -35,7 +35,7 @@ namespace CodingKatas.SteveSmith
             };
 
 
-            public void Attack(Character target)
+            public void Attack(ITargetable target)
             {
                 var attack = new AttackEvent(200, this);
                 
@@ -219,5 +219,14 @@ namespace CodingKatas.SteveSmith
             void Defend(AttackEvent attack);
         }
 
+        public class Prop : ITargetable
+        {
+            public int Health { get; private set; } = 1000;
+
+            public void Defend(AttackEvent attack)
+            {
+                Health -= attack.Damage;
+            }
+        }
     }
 }

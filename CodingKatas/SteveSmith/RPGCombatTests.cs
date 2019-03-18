@@ -227,6 +227,18 @@ namespace CodingKatas.SteveSmith
             }
         }
 
-        
+        public class Props
+        {
+            [Fact]
+            public void Props_TakeCanTakeDamage()
+            {
+                var prop = new Prop();
+                var character = new Character();
+
+                character.Attack(prop);
+
+                prop.Health.Should().Be(800);
+            }
+        }
     }
 }
