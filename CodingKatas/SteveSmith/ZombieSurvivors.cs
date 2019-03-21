@@ -1,20 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CodingKatas.SteveSmith
 {
     public class Survivor
     {
-        public int Wounds { get; set; }
+        private int _wounds;
 
-        public bool Alive { get; set; }
+        public int Wounds
+        {
+            get { return _wounds; }
+            set
+            {
+                if (Wounds < 2)
+                    _wounds = value;
+            }
+        }
+
+        public bool Alive { get; private set; }
+
+        public int ActionsPerformed { get; private set; }
 
         internal void Wound()
         {
             Wounds++;
             if (Wounds >= 2)
                 Alive = false;
+        }
+
+        public void PerformAction()
+        {
+            if (ActionsPerformed >= 3)
+                throw new InvalidOperationException();
+
+            ActionsPerformed++;
         }
     }
 }
