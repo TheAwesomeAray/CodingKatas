@@ -34,5 +34,10 @@ namespace CodingKatas.SteveSmith
 
             ActionsPerformed++;
         }
+
+        internal void EndOfTurn()
+        {
+            ActionsPerformed = 0;
+        }
     }
 }

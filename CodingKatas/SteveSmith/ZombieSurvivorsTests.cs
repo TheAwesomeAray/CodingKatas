@@ -55,8 +55,6 @@ namespace CodingKatas.SteveSmith
             survivor.EndOfTurn();
 
             survivor.ActionsPerformed.Should().Be(0);
-
-            action.Should().Throw<InvalidOperationException>();
         }
     }
 }
