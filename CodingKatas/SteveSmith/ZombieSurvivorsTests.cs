@@ -42,5 +42,21 @@ namespace CodingKatas.SteveSmith
 
             action.Should().Throw<InvalidOperationException>();
         }
+
+        [Fact]
+        public void Survivor_EndOfTurn_ActionsAreReset()
+        {
+            var survivor = new Survivor();
+
+            survivor.PerformAction();
+            survivor.PerformAction();
+            survivor.PerformAction();
+
+            survivor.EndOfTurn();
+
+            survivor.ActionsPerformed.Should().Be(0);
+
+            action.Should().Throw<InvalidOperationException>();
+        }
     }
 }
