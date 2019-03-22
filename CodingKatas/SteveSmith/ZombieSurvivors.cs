@@ -23,7 +23,8 @@ namespace CodingKatas.SteveSmith
 
         public int ActionsPerformed { get; private set; }
 
-        private List<Equipment> Equipment { get; set; } = new List<Equipment>();
+        private List<Equipment> _equipment { get; set; } = new List<Equipment>();
+        public IReadOnlyList<Equipment> Equipment => _equipment.AsReadOnly();
 
         internal void Wound()
         {
@@ -49,7 +50,8 @@ namespace CodingKatas.SteveSmith
         {
             if (Equipment.Count == MaxEquipment)
                 throw new InvalidOperationException();
-            Equipment.Add(equipment);
+
+            _equipment.Add(equipment);
         }
     }
 

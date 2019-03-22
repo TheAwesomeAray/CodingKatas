@@ -76,6 +76,18 @@ namespace CodingKatas.SteveSmith
 
                 action.Should().Throw<InvalidOperationException>();
             }
+
+            [Fact]
+            public void Survivor_CanCarryEquipment()
+            {
+                var survivor = new Survivor();
+
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+
+                survivor.Equipment.Count.Should().Be(3);
+            }
         }
     }
 }
