@@ -136,6 +136,21 @@ namespace CodingKatas.SteveSmith
 
                 survivor.Equipment.Single().Status.Should().Be(EquipmentStatus.Readied);
             }
+
+            [Fact]
+            public void Survivor_WoundsReduceCarryingCapacityBy1()
+            {
+                var survivor = new Survivor();
+                survivor.Wound();
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+
+                Action action = () => survivor.Equip(new Equipment());
+
+                action.Should().Throw<InvalidOperationException>();
+            }
         }
     }
 }

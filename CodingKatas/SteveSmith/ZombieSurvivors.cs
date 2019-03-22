@@ -30,6 +30,7 @@ namespace CodingKatas.SteveSmith
         internal void Wound()
         {
             Wounds++;
+            MaxEquipment--;
             if (Wounds >= 2)
                 Alive = false;
         }
