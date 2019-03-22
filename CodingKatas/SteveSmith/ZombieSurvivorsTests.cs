@@ -88,6 +88,39 @@ namespace CodingKatas.SteveSmith
 
                 survivor.Equipment.Count.Should().Be(3);
             }
+
+            [Fact]
+            public void Survivor_CanReadyEquipment()
+            {
+                var survivor = new Survivor();
+                var equipmentToReady = new Equipment();
+                survivor.Equip(equipmentToReady);
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+
+                survivor.Ready(equipmentToReady);
+
+                equipmentToReady.Status = EquipmentStatus.Readied;
+            }
+
+            [Fact]
+            public void Survivor_CanReadyMaximumofTwoPiecesOfEquipment()
+            {
+                var survivor = new Survivor();
+                var equipmentToReady1 = new Equipment();
+                var equipmentToReady2 = new Equipment();
+                var equipmentToReady3 = new Equipment();
+                survivor.Equip(equipmentToReady1);
+                survivor.Equip(equipmentToReady2);
+                survivor.Equip(equipmentToReady3);
+                survivor.Ready(equipmentToReady1);
+                survivor.Ready(equipmentToReady2);
+                
+
+                Action action = () => survivor.Ready(equipmentToReady3);
+
+                action.Should().Throw<InvalidOperationException>();
+            }
         }
     }
 }

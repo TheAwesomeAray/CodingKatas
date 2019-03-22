@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingKatas.SteveSmith
 {
@@ -53,9 +54,33 @@ namespace CodingKatas.SteveSmith
 
             _equipment.Add(equipment);
         }
+
+        internal void Ready(Equipment equipmentToReady)
+        {
+            if (MaximumReadyCapacityExceeded(equipmentToReady))
+                throw new InvalidOperationException();
+            equipmentToReady.Status = EquipmentStatus.Readied;
+        }
+
+        private bool MaximumReadyCapacityExceeded(Equipment equipmentToReady)
+        {
+            return Equipment.Where(x => x.Status == EquipmentStatus.Readied).Count() >= 2 &&
+                                        equipmentToReady.Status != EquipmentStatus.Readied;
+                                        
+
+        }
     }
 
     public class Equipment
-    { }
+    {
+        public EquipmentStatus Status { get; internal set; } = EquipmentStatus.InBag;
+    }
+
+    public enum EquipmentStatus
+    {
+        InBag = 1,
+        Readied = 2
+    }
+
 
 }
