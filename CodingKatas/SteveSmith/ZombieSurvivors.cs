@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CodingKatas.SteveSmith
 {
     public class Survivor
     {
+        private int MaxEquipment { get; set; } = 5;
+
         private int _wounds;
 
         public int Wounds
@@ -19,6 +22,8 @@ namespace CodingKatas.SteveSmith
         public bool Alive { get; private set; }
 
         public int ActionsPerformed { get; private set; }
+
+        private List<Equipment> Equipment { get; set; } = new List<Equipment>();
 
         internal void Wound()
         {
@@ -39,5 +44,16 @@ namespace CodingKatas.SteveSmith
         {
             ActionsPerformed = 0;
         }
+
+        internal void Equip(Equipment equipment)
+        {
+            if (Equipment.Count == MaxEquipment)
+                throw new InvalidOperationException();
+            Equipment.Add(equipment);
+        }
     }
+
+    public class Equipment
+    { }
+
 }

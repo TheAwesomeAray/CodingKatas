@@ -6,55 +6,76 @@ namespace CodingKatas.SteveSmith
 {
     public class ZombieSurvivorsTests
     {
-        [Fact]
-        public void Survivor_WhenReceivedTwoWounds_AliveIsFalse()
+        public class GeneralTests
         {
-            var survivor = new Survivor();
+            [Fact]
+            public void Survivor_WhenReceivedTwoWounds_AliveIsFalse()
+            {
+                var survivor = new Survivor();
 
-            survivor.Wound();
-            survivor.Wound();
+                survivor.Wound();
+                survivor.Wound();
 
-            survivor.Alive.Should().BeFalse();
+                survivor.Alive.Should().BeFalse();
+            }
+
+            [Fact]
+            public void Survivor_WoundsCannotExceed2()
+            {
+                var survivor = new Survivor();
+
+                survivor.Wound();
+                survivor.Wound();
+                survivor.Wound();
+
+                survivor.Wounds.Should().Be(2);
+            }
+
+            [Fact]
+            public void Survivor_CanPerformThreeActionsPerTurn()
+            {
+                var survivor = new Survivor();
+
+                survivor.PerformAction();
+                survivor.PerformAction();
+                survivor.PerformAction();
+
+                Action action = () => survivor.PerformAction();
+
+                action.Should().Throw<InvalidOperationException>();
+            }
+
+            [Fact]
+            public void Survivor_EndOfTurn_ActionsAreReset()
+            {
+                var survivor = new Survivor();
+
+                survivor.PerformAction();
+                survivor.PerformAction();
+                survivor.PerformAction();
+
+                survivor.EndOfTurn();
+
+                survivor.ActionsPerformed.Should().Be(0);
+            }
         }
 
-        [Fact]
-        public void Survivor_WoundsCannotExceed2()
+        public class EquipmentTests
         {
-            var survivor = new Survivor();
+            [Fact]
+            public void Survivor_CanCarry5PiecesOfEquipment()
+            {
+                var survivor = new Survivor();
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
+                survivor.Equip(new Equipment());
 
-            survivor.Wound();
-            survivor.Wound();
-            survivor.Wound();
+                Action action = () => survivor.Equip(new Equipment());
 
-            survivor.Wounds.Should().Be(2);
-        }
-
-        [Fact]
-        public void Survivor_CanPerformThreeActionsPerTurn()
-        {
-            var survivor = new Survivor();
-
-            survivor.PerformAction();
-            survivor.PerformAction();
-            survivor.PerformAction();
-
-            Action action = () => survivor.PerformAction();
-
-            action.Should().Throw<InvalidOperationException>();
-        }
-
-        [Fact]
-        public void Survivor_EndOfTurn_ActionsAreReset()
-        {
-            var survivor = new Survivor();
-
-            survivor.PerformAction();
-            survivor.PerformAction();
-            survivor.PerformAction();
-
-            survivor.EndOfTurn();
-
-            survivor.ActionsPerformed.Should().Be(0);
+                action.Should().Throw<InvalidOperationException>();
+            }
         }
     }
 }
