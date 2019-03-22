@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace CodingKatas.SteveSmith
@@ -120,6 +121,20 @@ namespace CodingKatas.SteveSmith
                 Action action = () => survivor.Ready(equipmentToReady3);
 
                 action.Should().Throw<InvalidOperationException>();
+            }
+
+            [Fact]
+            public void Survivor_ReadyingEquipmentAlreadyInReadiedStateDoesNothing()
+            {
+                var survivor = new Survivor();
+                var equipmentToReady = new Equipment();
+                survivor.Equip(equipmentToReady);
+                survivor.Ready(equipmentToReady);
+                survivor.Ready(equipmentToReady);
+                survivor.Ready(equipmentToReady);
+                survivor.Ready(equipmentToReady);
+
+                survivor.Equipment.Single().Status.Should().Be(EquipmentStatus.Readied);
             }
         }
     }
