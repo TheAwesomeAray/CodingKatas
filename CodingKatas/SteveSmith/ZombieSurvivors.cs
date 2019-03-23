@@ -96,6 +96,9 @@ namespace CodingKatas.SteveSmith
         public IReadOnlyList<Survivor> Survivors => _survivors.AsReadOnly();
         public void AddSurvivor(Survivor survivor)
         {
+            if (Survivors.Select(x => x.Name).Contains(survivor.Name))
+                throw new InvalidOperationException();
+
             _survivors.Add(survivor);
         }
     }

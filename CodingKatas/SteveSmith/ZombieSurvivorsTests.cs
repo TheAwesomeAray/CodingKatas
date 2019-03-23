@@ -166,6 +166,18 @@ namespace CodingKatas.SteveSmith
                 game.Survivors.Count().Should().Be(1);
             }
             
+            [Fact]
+            public void AddSurvivor_SurvivorNameIsNotUnique_ThrowsInvalidOperationException()
+            {
+                var game = new Game();
+
+                var survivor = new Survivor("Bob");
+                var survivor2 = new Survivor("Bob");
+                game.AddSurvivor(survivor);
+                Action action = () => game.AddSurvivor(survivor2);
+
+                action.Should().Throw<InvalidOperationException>();
+            }
         }
     }
 }
