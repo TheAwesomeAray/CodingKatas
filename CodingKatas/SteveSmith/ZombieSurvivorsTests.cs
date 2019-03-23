@@ -152,5 +152,20 @@ namespace CodingKatas.SteveSmith
                 action.Should().Throw<InvalidOperationException>();
             }
         }
+
+        public class GameTests
+        {
+            [Fact]
+            public void AddSurvivor_SurvivorAddedToGame()
+            {
+                var game = new Game();
+
+                var survivor = new Survivor("Bob");
+                game.AddSurvivor(survivor);
+
+                game.Survivors.Count().Should().Be(1);
+            }
+            
+        }
     }
 }

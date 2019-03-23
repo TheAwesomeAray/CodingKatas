@@ -6,10 +6,9 @@ namespace CodingKatas.SteveSmith
 {
     public class Survivor
     {
+        public readonly string Name;
         private int MaxEquipment { get; set; } = 5;
-
         private int _wounds;
-
         public int Wounds
         {
             get { return _wounds; }
@@ -19,13 +18,21 @@ namespace CodingKatas.SteveSmith
                     _wounds = value;
             }
         }
-
         public bool Alive { get; private set; }
-
         public int ActionsPerformed { get; private set; }
 
         private List<Equipment> _equipment { get; set; } = new List<Equipment>();
         public IReadOnlyList<Equipment> Equipment => _equipment.AsReadOnly();
+
+        public Survivor(string name)
+        {
+            Name = name;
+        }
+
+        public Survivor()
+        {
+
+        }
 
         internal void Wound()
         {
@@ -83,5 +90,14 @@ namespace CodingKatas.SteveSmith
         Readied = 2
     }
 
+    public class Game
+    {
+        private List<Survivor> _survivors { get; set; } = new List<Survivor>();
+        public IReadOnlyList<Survivor> Survivors => _survivors.AsReadOnly();
+        public void AddSurvivor(Survivor survivor)
+        {
+            _survivors.Add(survivor);
+        }
+    }
 
 }
