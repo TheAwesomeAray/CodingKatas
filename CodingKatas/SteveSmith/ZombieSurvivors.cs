@@ -94,6 +94,7 @@ namespace CodingKatas.SteveSmith
     {
         private List<Survivor> _survivors { get; set; } = new List<Survivor>();
         public IReadOnlyList<Survivor> Survivors => _survivors.AsReadOnly();
+        private GameState State { get; set; } = GameState.InProgress;
         public void AddSurvivor(Survivor survivor)
         {
             if (Survivors.Select(x => x.Name).Contains(survivor.Name))
@@ -101,6 +102,20 @@ namespace CodingKatas.SteveSmith
 
             _survivors.Add(survivor);
         }
+
+        public GameState GetState()
+        {
+            if (!_survivors.Where(x => x.Alive).Any() && State != GameState.Over)
+                State = GameState.Over;
+
+            return State;
+        }
+    }
+
+    public enum GameState
+    {
+        InProgress = 1,
+        Over = 2
     }
 
 }

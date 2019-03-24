@@ -178,6 +178,19 @@ namespace CodingKatas.SteveSmith
 
                 action.Should().Throw<InvalidOperationException>();
             }
+
+            [Fact]
+            public void Game_Ends_WhenAllSurvivorsAreDead()
+            {
+                var game = new Game();
+                var survivor = new Survivor();
+                game.AddSurvivor(survivor);
+
+                survivor.Wound();
+                survivor.Wound();
+
+                game.GetState().Should().Be(GameState.Over);
+            }
         }
     }
 }
