@@ -20,6 +20,7 @@ namespace CodingKatas.SteveSmith
         }
         public bool Alive { get; private set; }
         public int ActionsPerformed { get; private set; }
+        public int Experience { get; private set; }
 
         private List<Equipment> _equipment { get; set; } = new List<Equipment>();
         public IReadOnlyList<Equipment> Equipment => _equipment.AsReadOnly();
@@ -30,9 +31,7 @@ namespace CodingKatas.SteveSmith
         }
 
         public Survivor()
-        {
-
-        }
+        { }
 
         internal void Wound()
         {
@@ -88,6 +87,14 @@ namespace CodingKatas.SteveSmith
     {
         InBag = 1,
         Readied = 2
+    }
+
+    public enum Level
+    {
+        Blue = 1,
+        Yellow,
+        Orange,
+        Red
     }
 
     public class Game
