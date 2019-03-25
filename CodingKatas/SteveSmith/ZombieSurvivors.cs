@@ -73,7 +73,7 @@ namespace CodingKatas.SteveSmith
         {
             return Equipment.Where(x => x.Status == EquipmentStatus.Readied).Count() >= 2 &&
                                         equipmentToReady.Status != EquipmentStatus.Readied;
-                                        
+
 
         }
 
@@ -85,6 +85,24 @@ namespace CodingKatas.SteveSmith
         private void GainExperience(int experience)
         {
             Experience += 1;
+        }
+    }
+
+    public class Levels
+    {
+        private LinkedList<LevelCriteria> LevelCriteriaCollection = new LinkedList<LevelCriteria>(
+            new List<LevelCriteria>()
+            {
+                new LevelCriteria() { Level = Level.Blue, ExperienceRequired = 0  },
+                new LevelCriteria() { Level = Level.Yellow, ExperienceRequired = 6  }
+            });
+        
+
+
+        private class LevelCriteria
+        {
+            public int ExperienceRequired { get; set; }
+            public Level Level { get; set; } 
         }
     }
 
