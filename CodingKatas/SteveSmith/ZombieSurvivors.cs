@@ -76,6 +76,16 @@ namespace CodingKatas.SteveSmith
                                         
 
         }
+
+        public void Kill()
+        {
+            GainExperience(1);
+        }
+
+        private void GainExperience(int experience)
+        {
+            Experience += 1;
+        }
     }
 
     public class Equipment

@@ -59,6 +59,16 @@ namespace CodingKatas.SteveSmith
 
                 survivor.ActionsPerformed.Should().Be(0);
             }
+
+            [Fact]
+            public void Survivor_Kill_Gains1Experience()
+            {
+                var survivor = new Survivor();
+
+                survivor.Kill();
+
+                survivor.Experience.Should().Be(1);
+            }
         }
 
         public class EquipmentTests
